@@ -136,6 +136,11 @@ class pisol_corw_cancel_request{
 
         $predefined_reason = filter_input(INPUT_POST, 'predefined_reason');
 
+        //do nonce verification
+        if(!isset($_POST['pi_cancellation_request_nonce']) || !wp_verify_nonce($_POST['pi_cancellation_request_nonce'], 'cancellation_request_'.$order_id)){
+            wp_die(__('Invalid request', 'cancel-order-request-woocommerce'), '', array('response' => 403));
+        }
+
         if(!self::reasonDescriptionGiven($reason, $predefined_reason)){
 
             $order = wc_get_order($order_id);

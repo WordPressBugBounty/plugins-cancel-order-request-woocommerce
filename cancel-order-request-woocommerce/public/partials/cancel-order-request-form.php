@@ -12,6 +12,7 @@
     <input type="hidden" name="order_id" value="<?php echo esc_attr($order_id); ?>">
     <input type="hidden" name="redirect_url" value="<?php echo esc_attr($redirect_url); ?>">
     <input type="hidden" name="order_key" value="<?php echo esc_attr($order_key); ?>">
+    <?php wp_nonce_field('cancellation_request_'.$order_id, 'pi_cancellation_request_nonce'); ?>
     <input type="submit" class="woocommerce-button button pi-cancel-request-submit-button" value="<?php echo esc_attr(__('Send Cancellation Request', 'cancel-order-request-woocommerce')); ?>">
 </form>
 </div>
