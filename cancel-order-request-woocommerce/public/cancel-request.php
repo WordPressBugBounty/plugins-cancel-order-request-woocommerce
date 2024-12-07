@@ -38,7 +38,7 @@ class pisol_corw_cancel_request{
             $order_id = version_compare( WC_VERSION, '3.0.0', '<' ) ? $order->id : $order->get_id();
 
             $actions['pi_cancel_request_form'] = array(
-                    'url'  => admin_url("admin-ajax.php?action=pi_order_cancel_request_form&order_id={$order_id}"),
+                    'url'  => wp_nonce_url(admin_url("admin-ajax.php?action=pi_order_cancel_request_form&order_id={$order_id}"), 'order_cancel_request_'.$order_id),
                     'name' => __( 'Cancel Request', 'cancel-order-request-woocommerce' )
             );
 
@@ -89,6 +89,15 @@ class pisol_corw_cancel_request{
     function getOrderCancelForm(){
         $redirect_url = wp_get_referer() ? wp_get_referer() : get_permalink(get_option('woocommerce_myaccount_page_id'));
         $order_id = filter_input(INPUT_GET, 'order_id');
+
+        if(empty($order_id)){
+            wp_die(__('Invalid request', 'cancel-order-request-woocommerce'), '', array('response' => 403));
+        }
+
+        //verify nonce 
+        if(!isset($_GET['_wpnonce']) || !wp_verify_nonce($_GET['_wpnonce'], 'order_cancel_request_'.$order_id)){
+            wp_die(__('Invalid request', 'cancel-order-request-woocommerce'), '', array('response' => 403));
+        }
 
         $admin_notice = pisol_corw_get_option('pi_corw_order_admin_notice', '');
 
@@ -289,7 +298,7 @@ class pisol_corw_cancel_request{
         if(self::allowOrderCancelRequest($order)){
             $order_id = version_compare( WC_VERSION, '3.0.0', '<' ) ? $order->id : $order->get_id();
 
-            $url = admin_url("admin-ajax.php?action=pi_order_cancel_request_form&order_id={$order_id}");
+            $url = wp_nonce_url(admin_url("admin-ajax.php?action=pi_order_cancel_request_form&order_id={$order_id}"), 'order_cancel_request_'.$order_id);
             $order_status = $order->get_status();
             echo '<span class="pi-corw-text">'.__('Want to cancel this order? ', 'cancel-order-request-woocommerce').'</span>';
             echo '<a href="'.esc_url($url).'" class="pi_cancel_request_form">';
