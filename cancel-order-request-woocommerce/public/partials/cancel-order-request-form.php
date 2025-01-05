@@ -6,6 +6,14 @@
     <?php endif; ?>
     
     <?php echo $predefined_reasons; ?>
+
+    <?php if(pisol_corw_wallet_refund::give_wallet_refund_option() && pisol_corw_wallet_refund::waller_refund_enabled()): 
+        $wallet_refund_text = get_option('pi_corw_give_refund_in_wallet', __('Credit refund amount in the wallet','cancel-order-request-woocommerce'));    
+    ?>
+    <label class="pi-wallet-refund" for="do_wallet_refund">
+        <input type="checkbox" name="do_wallet_refund" id="do_wallet_refund"value="1" checked="checked" class="mr-5" /> <?php echo $wallet_refund_text; ?>
+    </label>
+    <?php endif; ?>
  
     <textarea name="order_cancel_reason" placeholder="<?php echo esc_attr(__('Reason for order canceling','cancel-order-request-woocommerce')); ?>" class="mb-10"></textarea>
     <input type="hidden" name="action" value="pi_cancellation_request">

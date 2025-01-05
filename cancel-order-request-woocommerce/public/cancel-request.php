@@ -145,6 +145,10 @@ class pisol_corw_cancel_request{
 
         $predefined_reason = filter_input(INPUT_POST, 'predefined_reason');
 
+        $do_wallet_refund = filter_input(INPUT_POST, 'do_wallet_refund');
+
+        $do_wallet_refund = !empty($do_wallet_refund) ? 1 : 0;
+
         //do nonce verification
         if(!isset($_POST['pi_cancellation_request_nonce']) || !wp_verify_nonce($_POST['pi_cancellation_request_nonce'], 'cancellation_request_'.$order_id)){
             wp_die(__('Invalid request', 'cancel-order-request-woocommerce'), '', array('response' => 403));
@@ -172,7 +176,7 @@ class pisol_corw_cancel_request{
         }
 
         if(self::userCanRequestCancellation($order_id)){
-            self::recordCancellationRequest($order_id, $reason, $predefined_reason);
+            self::recordCancellationRequest($order_id, $reason, $predefined_reason, $do_wallet_refund);
             wp_safe_redirect($redirect);
         }else{
             wp_die(__('You do not have permissions to request cancellation for this order.', 'cancel-order-request-woocommerce'), '', array('response' => 403));
@@ -244,17 +248,20 @@ class pisol_corw_cancel_request{
         return false;
     }
 
-    static function recordCancellationRequest($order_id, $reason, $predefined_reason){
+    static function recordCancellationRequest($order_id, $reason, $predefined_reason, $do_wallet_refund = 0){
         $order = wc_get_order($order_id);
         $order->update_meta_data( 'order_cancel_reason', $reason);
         $order->update_meta_data( 'cancellation_date', current_time('Y/m/d H:i'));
         $order->update_meta_data( 'predefined_reason', $predefined_reason);
+        $order->update_meta_data( 'do_wallet_refund', $do_wallet_refund);
         $order_no = method_exists($order, 'get_order_number') ? $order->get_order_number() : $order->get_id();
 
         /**
          * Adding to order note
          */
         self::addCancelReasonInOrderNote($order_id, $reason, $predefined_reason);
+
+        do_action('pisol_corw_cancel_request_received', $order_id, $reason);
 
         /** this will allow us to directly cancel the order instead of waiting for admin approval */
         $new_status = apply_filters('pisol_corw_cancel_request_new_status','cancel-request' );

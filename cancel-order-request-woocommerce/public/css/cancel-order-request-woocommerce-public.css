@@ -76,3 +76,12 @@
     text-align: center;
     color: #000 !important;
 }
+
+
+.pi-wallet-refund{
+    display:block;
+    padding:10px;
+    background:#ccc;
+    margin-bottom:15px;
+    border-radius:10px;
+}

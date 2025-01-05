@@ -3,8 +3,8 @@ Contributors: rajeshsingh520
 Donate link: piwebsolution.com
 Tags: order again, re-order, cancel order, woocommerce cancel order, return, refund
 Requires at least: 3.0.1
-Tested up to: 6.7.2
-Stable tag: 1.3.3.72
+Tested up to: 6.7.1
+Stable tag: 1.3.3.73
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -168,6 +168,9 @@ At present only TerraWallet is supported, if you have any other wallet plugin an
 Yes the Free version and PRO version both are HPOS compatible
 
 == Changelog ==
+
+= 1.3.3.73 =
+* Auto refund option given in the free version
 
 = 1.3.3.70 =
 * nonce added in the form
