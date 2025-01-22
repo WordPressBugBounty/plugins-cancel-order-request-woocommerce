@@ -4,7 +4,7 @@ Donate link: piwebsolution.com
 Tags: order again, re-order, cancel order, woocommerce cancel order, return, refund
 Requires at least: 3.0.1
 Tested up to: 6.7.1
-Stable tag: 1.3.3.73
+Stable tag: 1.3.3.74
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -28,6 +28,9 @@ Replace WooCommerce cancel order button with order cancellation request button, 
 &#9989; View order **detail link added in the email send to the customer**, you have the option to add this link for Registered customer or Guest customer or both
 &#9989; **Guest customer can request order cancellation**, from the link given in the order detail page (Thank your page)
 &#9989; Cancellation reason is auto added in the **Order note**
+&#9989; Auto refund as store credit discount coupon
+&#9989; Give option to customer to accept direct refund as store credit coupon, this way you can keep the customer money in your store
+
 
 = Repeat Order option =
 With our extension you can integrate and display the button “re-order”, “repeat order” on the overview page. 
@@ -168,6 +171,9 @@ At present only TerraWallet is supported, if you have any other wallet plugin an
 Yes the Free version and PRO version both are HPOS compatible
 
 == Changelog ==
+
+= 1.3.3.74 =
+* Tested for WC 9.5.0
 
 = 1.3.3.73 =
 * Auto refund option given in the free version

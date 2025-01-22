@@ -62,9 +62,8 @@ class pisol_corw_wallet_refund_setting{
 
     function tab_content(){
         if(!pisol_corw_wallet_refund::has_supported_wallet()){
-            echo '<div class="alert alert-success mt-3">This feature requires another plugin (<a href="https://wordpress.org/plugins/add-coupon-by-link-for-woocommerce/" target="_blank">Add coupon by url / Store credit</a>) from wordpress.org You can install it using below button<br> <button id="pisol-install-dependency-plugin" class="button-primary mt-3">Click to Install / Activate module</button></div> ';
-            ?>
-            <?php
+            echo '<div class="alert alert-success mt-3">This feature requires another plugin (<a href="https://wordpress.org/plugins/add-coupon-by-link-for-woocommerce/" target="_blank">Add coupon by url / Store credit</a>) from wordpress.org You can install it using below button<br> <button id="pisol-corw-install-dependency-plugin" class="button-primary mt-3">Click to Install / Activate module</button></div> ';
+            
             return;
         }
        ?>
