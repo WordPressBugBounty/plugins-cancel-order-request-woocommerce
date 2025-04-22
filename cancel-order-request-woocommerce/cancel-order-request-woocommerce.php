@@ -9,14 +9,14 @@
  * that starts the plugin.
  *
  * @link              piwebsolution.com
- * @since             1.3.4.0
+ * @since             1.3.4.1
  * @package           Cancel_Order_Request_Woocommerce
  *
  * @wordpress-plugin
  * Plugin Name:       Cancel order request for WooCommerce
  * Plugin URI:        piwebsolution.com/cancel-order-request-woocommerce
  * Description:       Gives option to replace Cancel order button with Cancel order request button, so user can send cancellation request
- * Version:           1.3.4.0
+ * Version:           1.3.4.1
  * Author:            PI Websolution
  * Author URI:        piwebsolution.com
  * License:           GPL-2.0+
@@ -60,10 +60,10 @@ if(!is_plugin_active( 'woocommerce/woocommerce.php')){
 
 /**
  * Currently plugin version.
- * Start at version 1.3.4.0 and use SemVer - https://semver.org
+ * Start at version 1.3.4.1 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'CANCEL_ORDER_REQUEST_WOOCOMMERCE_VERSION', '1.3.4.0' );
+define( 'CANCEL_ORDER_REQUEST_WOOCOMMERCE_VERSION', '1.3.4.1' );
 
 define('PISOL_CORW_BASE_DIR', __DIR__);
 define('PISOL_CORW_PRICE', '$19');
@@ -128,7 +128,7 @@ function pisol_cancel_order_request_plugin_link( $links ) {
  * then kicking off the plugin from this point in the file does
  * not affect the page life cycle.
  *
- * @since    1.3.4.0
+ * @since    1.3.4.1
  */
 function run_cancel_order_request_woocommerce() {
 
