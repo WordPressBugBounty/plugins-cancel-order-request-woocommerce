@@ -1,10 +1,10 @@
 === Cancel order request / Return order / Repeat Order / Reorder for WooCommerce ===
 Contributors: rajeshsingh520
 Donate link: piwebsolution.com
-Tags: order again, re-order, cancel order, woocommerce cancel order, return, refund
+Tags: order again, re-order, cancel order, woocommerce cancel order, woocommerce cancel order, woocommerce cancel order
 Requires at least: 3.0.1
 Tested up to: 6.8.1
-Stable tag: 1.3.4.3
+Stable tag: 1.3.4.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -171,6 +171,9 @@ At present only TerraWallet is supported, if you have any other wallet plugin an
 Yes the Free version and PRO version both are HPOS compatible
 
 == Changelog ==
+
+= 1.3.4.4 =
+* Woocommerce cancel order plugin tested for WC 9.9.3
 
 = 1.3.4.2 =
 * Tested for WC 9.8.0
