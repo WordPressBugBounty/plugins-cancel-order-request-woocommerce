@@ -55,7 +55,7 @@ class pisol_corw_wallet_refund_setting{
     function tab(){
         ?>
         <a class=" px-3 text-light d-flex align-items-center  border-left border-right  <?php echo ($this->active_tab == $this->this_tab ? 'bg-primary' : 'bg-secondary'); ?>" href="<?php echo admin_url( 'admin.php?page='.sanitize_text_field($_GET['page']).'&tab='.$this->this_tab ); ?>">
-            <?php _e( $this->tab_name, 'http2-push-content' ); ?> 
+           <span class="dashicons dashicons-money-alt"></span> <?php _e( $this->tab_name, 'http2-push-content' ); ?> 
         </a>
         <?php
     }
@@ -74,7 +74,7 @@ class pisol_corw_wallet_refund_setting{
                 new pisol_class_form_corw($setting, $this->setting_key);
             }
         ?>
-        <input type="submit" class="mt-3 btn btn-primary btn-lg" value="Save Option" />
+        <input type="submit" class="my-3 btn btn-primary btn-md" value="Save Option" />
         </form>
        <?php
     }

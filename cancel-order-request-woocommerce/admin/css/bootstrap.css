@@ -4,7 +4,7 @@
  * Copyright 2011-2020 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
-.bootstrap-wrapper :root {
+:root {
 	--blue: #007bff;
 	--indigo: #6610f2;
 	--purple: #6f42c1;
@@ -18,14 +18,16 @@
 	--white: #fff;
 	--gray: #6c757d;
 	--gray-dark: #343a40;
-	--primary: #007bff;
+	--primary: #ee6443;
+	--primary2: #c76952;
 	--secondary: #6c757d;
 	--success: #28a745;
 	--info: #17a2b8;
 	--warning: #ffc107;
 	--danger: #dc3545;
 	--light: #f8f9fa;
-	--dark: #343a40;
+	--dark: #1a4562;
+	--dark2: rgba(26, 69, 98, 0.75);
 	--breakpoint-xs: 0;
 	--breakpoint-sm: 576px;
 	--breakpoint-md: 768px;
@@ -2914,14 +2916,14 @@
 
 .bootstrap-wrapper .btn-primary {
 	color: #fff;
-	background-color: #007bff;
-	border-color: #007bff;
+	background-color: var(--primary);
+	border-color: var(--primary);
 }
 
 .bootstrap-wrapper .btn-primary:hover {
 	color: #fff;
-	background-color: #0069d9;
-	border-color: #0062cc;
+	background-color: var(--primary2);
+	border-color: var(--primary2);
 }
 
 .bootstrap-wrapper .btn-primary:focus,
@@ -7414,7 +7416,11 @@
 }
 
 .bootstrap-wrapper .bg-dark {
-	background-color: #343a40 !important;
+	background-color: var(--dark) !important;
+}
+
+.bootstrap-wrapper .bg-dark2 {
+	background-color: var(--dark2) !important;
 }
 
 .bootstrap-wrapper a.bg-dark:hover,
@@ -11680,31 +11686,3 @@ svg {
 }
 
 /* end tooltip */
-
-
-.bootstrap-wrapper .pi-shadow{
-	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-	position:relative;
-	z-index:1;
-	border-radius: 15px;
-}
-
-#pi-promotion-banner{
-	max-width:70%;
-	margin:auto;
-	display:block;
-}
-
-h2#pi-banner-tagline{
-padding:10px;
-background:#1a4562;
-color:#fff !important;
-font-size:1.5rem !important;
-text-align:center;
-}
-
-.pisol-pro-feature-list li{
-	list-style-type: none;
-	padding:10px 15px;
-	margin-bottom:0 !important;
-}

@@ -1,10 +1,10 @@
 === Cancel order request / Return order / Repeat Order / Reorder for WooCommerce ===
 Contributors: rajeshsingh520
 Donate link: piwebsolution.com
-Tags: order again, re-order, cancel order, woocommerce cancel order, woocommerce cancel order, woocommerce cancel order
+Tags: order again, re-order, cancel order, woocommerce cancel order, return, refund
 Requires at least: 3.0.1
-Tested up to: 6.8.1
-Stable tag: 1.3.4.4
+Tested up to: 6.8
+Stable tag: 1.3.4.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -170,7 +170,32 @@ At present only TerraWallet is supported, if you have any other wallet plugin an
 = Is it HPOS compatible =
 Yes the Free version and PRO version both are HPOS compatible
 
+== Screenshots ==
+1. Basic configuration of WooCommerce cancel order plugin
+2. Different email template for WooCommerce cancel order plugin
+3. Cancel order request button on the order detail page
+4. Cancel order request form 
+5. Woocommerce cancel order plugin email to admin
+6. Cancellation request order status in the order list  
+7. Cancellation reason shown in the order detail page
+8. Cancel order request button on the order list page
+9. Email send to customer when order cancellation request is rejected
+10. Email send to customer when order cancellation request is accepted
+11. Email send to customer when new order cancellation request is received
+12. Custoemr can raise a cancellation request from the order detail page
+13. Repurcahse option
+14. Popup shown when repeat order button is clicked 
+15. Woocommerce cancel order plugin repeat order button on the order detail page
+16. Pro version allows you to cancel specific product from the order 
+17. Issue refund to the wallet 
+18. Woocommerce orer cancel plugin allow auto cencellation of order
+19. Auto refund in the customer wallet
+
 == Changelog ==
+
+= 1.3.4.6 =
+* Cancel order request plugin Tested for WC 9.9.5
+* UI improvement
 
 = 1.3.4.4 =
 * Woocommerce cancel order plugin tested for WC 9.9.3

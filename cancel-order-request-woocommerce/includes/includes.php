@@ -12,6 +12,7 @@ require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/plugins.php';
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/reorder.php';
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/wallet-refund.php';
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-dependency.php';
+require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-analytics.php';
 
 
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/cancel-request.php';

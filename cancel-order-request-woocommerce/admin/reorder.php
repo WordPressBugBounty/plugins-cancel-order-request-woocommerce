@@ -25,6 +25,8 @@ class pisol_corw_reorder_option{
         $this->active_tab = $this->tab != "" ? $this->tab : 'default';
 
         $this->settings = array(
+
+            array('field'=>'color-setting', 'class'=> 'bg-dark2 text-light', 'class_title'=>'text-light font-weight-light h4', 'label'=>__('Repurchase setting','cancel-order-request-woocommerce'), 'type'=>'setting_category'),
         
             array('field'=>'pi_corw_reorder_button', 'label'=>__('Show Repeat order button on order with this status','cancel-order-request-woocommerce'),'type'=>'multiselect', 'default'=> array(), 'value'=> $this->orderStatus(),  'desc'=>__('Cancel order button will be allowed for order with this status','cancel-order-request-woocommerce')),
 
@@ -34,7 +36,7 @@ class pisol_corw_reorder_option{
 
             array('field'=>'pi_corw_reorder_redirect1', 'label'=>__('What to do after repeat order products are added to the cart','cancel-order-request-woocommerce'),'type'=>'select', 'default'=> 'ask-customer', 'value'=> array('ask-customer' => __('Ask customer in popup','cancel-order-request-woocommerce'), 'redirect-cart' => __('Direct redirect to cart page','cancel-order-request-woocommerce'), 'redirect-checkout' => __('Direct redirect to checkout page','cancel-order-request-woocommerce')),  'desc'=>__('When the repeat order product are added in the cart, we can directly redirect then to cart page or checkout page or show customer a popup with link to cart and checkout page','cancel-order-request-woocommerce'), 'pro'=>true),
 
-            array('field'=>'color-setting', 'class'=> 'bg-primary text-light', 'class_title'=>'text-light font-weight-light h4', 'label'=>__('Button Labels','cancel-order-request-woocommerce'), 'type'=>'setting_category'),
+            array('field'=>'color-setting', 'class'=> 'bg-dark2 text-light', 'class_title'=>'text-light font-weight-light h4', 'label'=>__('Button Labels','cancel-order-request-woocommerce'), 'type'=>'setting_category'),
 
             array('field'=>'pi_corw_reorder_button_text', 'label'=>__('Repeat order','cancel-order-request-woocommerce'),'type'=>'text', 'default'=>'Repeat Order', 'desc'=>__('label of the repeat order button','cancel-order-request-woocommerce')),
 
@@ -46,7 +48,7 @@ class pisol_corw_reorder_option{
 
             array('field'=>'pi_corw_reorder_go_to_checkout_button_text', 'label'=>__('Go to Checkout','cancel-order-request-woocommerce'),'type'=>'text', 'default'=>'Checkout', 'desc'=>__('label of the go to checkout button shown after successful insertion','cancel-order-request-woocommerce')),
 
-            array('field'=>'color-setting', 'class'=> 'bg-primary text-light', 'class_title'=>'text-light font-weight-light h4', 'label'=>__('Color Settings','cancel-order-request-woocommerce'), 'type'=>'setting_category'),
+            array('field'=>'color-setting', 'class'=> 'bg-dark2 text-light', 'class_title'=>'text-light font-weight-light h4', 'label'=>__('Color Settings','cancel-order-request-woocommerce'), 'type'=>'setting_category'),
 
             array('field'=>'pi_corw_reorder_success_background_color', 'label'=>__('Success popup background color','cancel-order-request-woocommerce'),'type'=>'color', 'default'=>'#51a564', 'desc'=>__('The toast dialog that open on success or to give options','cancel-order-request-woocommerce')),
 
@@ -90,7 +92,7 @@ class pisol_corw_reorder_option{
         $this->tab_name = __('Repurchase', 'cancel-order-request-woocommerce');
         ?>
         <a class=" px-3 text-light d-flex align-items-center  border-left border-right  <?php echo ($this->active_tab == $this->this_tab ? 'bg-primary' : 'bg-secondary'); ?>" href="<?php echo admin_url( 'admin.php?page='.sanitize_text_field($_GET['page']).'&tab='.$this->this_tab ); ?>">
-            <?php echo $this->tab_name; ?> 
+           <span class="dashicons dashicons-cart"></span> <?php echo $this->tab_name; ?> 
         </a>
         <?php
     }
@@ -104,7 +106,7 @@ class pisol_corw_reorder_option{
                 new pisol_class_form_corw($setting, $this->setting_key);
             }
         ?>
-        <input type="submit" class="mt-3 btn btn-primary btn-sm" value="<?php _e('Save Option','cancel-order-request-woocommerce'); ?>" />
+        <input type="submit" class="my-3 btn btn-primary btn-md" value="<?php _e('Save Option','cancel-order-request-woocommerce'); ?>" />
         </form>
        <?php
     }

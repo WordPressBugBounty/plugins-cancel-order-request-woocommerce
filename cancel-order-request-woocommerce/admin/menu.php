@@ -47,11 +47,17 @@ class pisol_corw_menu{
                     <div class="col-12">
                         <div class='bg-dark'>
                         <div class="pisol-row">
-                            <div class="col-12 col-sm-2 py-2">
-                                    <a href="https://www.piwebsolution.com/" target="_blank"><img class="img-fluid ml-2" src="<?php echo plugin_dir_url( __FILE__ ); ?>img/pi-web-solution.png"></a>
+                            <div class="col-12 col-sm-2 py-2 d-flex align-items-center justify-content-center">
+                                    <a href="https://www.piwebsolution.com/" target="_blank"><img id="pi-logo" class="img-fluid ml-2" src="<?php echo plugin_dir_url( __FILE__ ); ?>img/pi-web-solution.png"></a>
                             </div>
                             <div class="col-12 col-sm-10 d-flex text-center small">
-                                <?php do_action($this->plugin_name.'_tab'); ?>
+                                <nav id="pisol-navbar" class="navbar navbar-expand-lg navbar-light mr-0 ml-auto">
+                                    <div>
+                                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                            <?php do_action($this->plugin_name.'_tab'); ?>
+                                        </ul>
+                                    </div>
+                                </nav>
                             </div>
                         </div>
                         </div>
@@ -59,7 +65,7 @@ class pisol_corw_menu{
             </div>
             <div class="pisol-row">
                 <div class="col-12">
-                <div class="bg-light border pl-3 pr-3 pb-3 pt-0">
+                <div class="bg-light border pl-3 pr-3 pt-0">
                     <div class="pisol-row">
                         <div class="col">
                         <?php do_action($this->plugin_name.'_tab_content'); ?>
@@ -76,37 +82,32 @@ class pisol_corw_menu{
 
     function promotion(){
         ?>
-        <div class="col-12 col-sm-4 pt-3">
+        <div class="col-12 col-sm-4 pt-3 border-left">
 
             
-            <div class="pi-shadow">
-                <div class="pisol-row justify-content-center">
-                    <div class="col-md-7 col-sm-12">
-                        <div class="p-2  text-center">
-                            <img class="img-fluid" src="<?php echo esc_url(plugin_dir_url( __FILE__ )); ?>img/bg.svg">
-                        </div>
-                    </div>
-                </div>
-                <div class="text-center py-2">
-                    <a class="btn btn-success btn-sm text-uppercase mb-2 " href="<?php echo esc_url(PISOL_CORW_BUY_URL); ?>&utm_ref=top_link" target="_blank">Buy Now !!</a>
-                    <a class="btn btn-sm mb-2 btn-secondary text-uppercase" href="http://websitemaintenanceservice.in/cancel_demo/" target="_blank">Try Demo</a>
-                </div>
-                <h2 id="pi-banner-tagline" class="mb-0">Get Pro for <?php echo esc_html(PISOL_CORW_PRICE); ?> Only</h2>
-             
+            <div class="pi-shadow rounded px-2 py-3 mb-3 pi-sticky">
+                
+                    <h2 id="pi-banner-tagline" class="mb-0" style="color:#ccc !important;">
+                        <span class="d-block mb-4">⭐️⭐️⭐️⭐️⭐️</span>
+                        <span class="d-block mb-2">🚀 Trusted by <span style="color:#fff;">3,000+</span> WooCommerce Stores</span>
+                        <span class="d-block mb-2">Rated <span style="color:#fff;">4.9/5</span> – Users love it</span>
+                    </h2>
                 <div class="inside">
                     <ul class="pisol-pro-feature-list">
-                    <li class="border-top h6 font-weight-light">Allow <strong class="font-weight-bold">partial order cancellation</Strong> request</li>
-                    <li class="border-top h6 font-weight-light">Disable cancellation option for <strong class=" font-weight-bold">specific product</strong></li>
-                    <li class="border-top h6 font-weight-light">Allow user to <strong  class="font-weight-bold">upload image file</strong> along with cancellation request</li>
-                    <li class="border-top h6 font-weight-light">Give option to <strong class="font-weight-bold">Withdraw cancellation request</strong></li>
-                    <li class="border-top h6 font-weight-light">Disable cancellation request option based on the <strong class="font-weight-bold">Payment method</strong></li>
-                    <li class="border-top h6 font-weight-light">Disable cancellation request option based on the <strong class="font-weight-bold">Customer group</strong></li>
-                    <li class="border-top h6 font-weight-light">Set <strong class="font-weight-bold">default action</strong> on repeat order</li>
-                    <li class="border-top h6 font-weight-light">Redirect to cart or checkout page once repeat order product are added in cart</li>
-                    <li class="border-top h6 font-weight-light"><strong  class="font-weight-bold">Auto process refund</strong> and issue refund in the Wallet balance (Support TerraWallet plugin)</li>
+                        <li>✔ Partial order cancellation</li>
+                        <li>✔ Disable cancel for specific product</li>
+                        <li>✔ Upload image with cancel request</li>
+                        <li>✔ Withdraw cancellation request</li>
+                        <li>✔ Disable cancel by payment method</li>
+                        <li>✔ Disable cancel by customer group</li>
+                        <li>✔ Set default action on repeat order</li>
+                        <li>✔ Redirect to cart/checkout on repeat</li>
+                        <li>✔ Auto refund to Wallet (TerraWallet)</li>
                     </ul>
+                    <h4 class="pi-bottom-banner">💰 Just <?php echo esc_html(PISOL_CORW_PRICE); ?></h4>
+                    <h4 class="pi-bottom-banner">🔥 Unlock all features and grow your sales!</h4>
                     <div class="text-center pb-3 pt-2">
-                        <a class="btn btn-primary btn-lg" href="<?php echo PISOL_CORW_BUY_URL; ?>&utm_ref=bottom_link" target="_blank">BUY PRO VERSION</a>
+                        <a class="btn btn-primary btn-md" href="<?php echo PISOL_CORW_BUY_URL; ?>&utm_ref=bottom_link" target="_blank">🔓 Unlock Pro Now – Limited Time Price!</a>
                     </div>
                 </div>
             </div>

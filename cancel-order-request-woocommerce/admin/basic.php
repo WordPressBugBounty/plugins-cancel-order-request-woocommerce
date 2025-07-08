@@ -25,6 +25,8 @@ class pisol_corw_basic_option{
         $this->active_tab = $this->tab != "" ? $this->tab : 'default';
 
         $this->settings = array(
+
+            array('field'=>'color-setting', 'class'=> 'bg-dark2 text-light', 'class_title'=>'text-light font-weight-light h4', 'label'=>__('Basic setting','cancel-order-request-woocommerce'), 'type'=>'setting_category'),
             
             array('field'=>'pi_corw_order_status_allow_cancel_request', 'label'=>__('Show cancel order request button on order with this status','cancel-order-request-woocommerce'),'type'=>'multiselect', 'default'=> array('wc-processing'), 'value'=> $this->orderStatus(),  'desc'=>__('Cancel order button will be allowed for order with this status','cancel-order-request-woocommerce')),
 
@@ -49,7 +51,7 @@ class pisol_corw_basic_option{
 
             array('field'=>'pi_corw_allow_file_upload1', 'label'=>__('Allow customer to upload image along with cancellation reason','cancel-order-request-woocommerce'),'type'=>'switch', 'default'=>0, 'desc'=>__('If enabled the user will be able to upload one image file along with the cancellation reason','cancel-order-request-woocommerce'), 'pro'=>true),
 
-            array('field'=>'color-setting', 'class'=> 'bg-primary text-light', 'class_title'=>'text-light font-weight-light h4', 'label'=>__('Withdraw cancellation request','cancel-order-request-woocommerce'), 'type'=>'setting_category'),
+            array('field'=>'color-setting', 'class'=> 'bg-dark2 text-light', 'class_title'=>'text-light font-weight-light h4', 'label'=>__('Withdraw cancellation request','cancel-order-request-woocommerce'), 'type'=>'setting_category'),
 
             array('field'=>'pi_corw_withdraw_cancellation_request1', 'label'=>__('Allow withdrawal of cancellation request','cancel-order-request-woocommerce'),'type'=>'switch', 'default'=>0, 'desc'=>__('If enabled the user will be able to withdraw cancellation request till the request is not accepted/declined by the admin','cancel-order-request-woocommerce'), 'pro'=>true),
 
@@ -89,7 +91,7 @@ class pisol_corw_basic_option{
         $this->tab_name = __('Basic setting', 'cancel-order-request-woocommerce');
         ?>
         <a class=" px-3 text-light d-flex align-items-center  border-left border-right  <?php echo ($this->active_tab == $this->this_tab ? 'bg-primary' : 'bg-secondary'); ?>" href="<?php echo admin_url( 'admin.php?page='.sanitize_text_field($_GET['page']).'&tab='.$this->this_tab ); ?>">
-            <?php echo $this->tab_name; ?> 
+           <span class="dashicons dashicons-admin-generic"></span> <?php echo $this->tab_name; ?> 
         </a>
         <?php
     }
@@ -103,7 +105,7 @@ class pisol_corw_basic_option{
                 new pisol_class_form_corw($setting, $this->setting_key);
             }
         ?>
-        <input type="submit" class="mt-3 btn btn-primary btn-sm" value="<?php _e('Save Option','cancel-order-request-woocommerce'); ?>" />
+        <input type="submit" class="my-3 btn btn-primary btn-md" value="<?php _e('Save Option','cancel-order-request-woocommerce'); ?>" />
         </form>
        <?php
     }
