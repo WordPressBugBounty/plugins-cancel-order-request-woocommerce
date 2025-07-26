@@ -94,15 +94,15 @@ class pisol_corw_menu{
                     </h2>
                 <div class="inside">
                     <ul class="pisol-pro-feature-list">
-                        <li>✔ Partial order cancellation</li>
-                        <li>✔ Disable cancel for specific product</li>
-                        <li>✔ Upload image with cancel request</li>
-                        <li>✔ Withdraw cancellation request</li>
-                        <li>✔ Disable cancel by payment method</li>
-                        <li>✔ Disable cancel by customer group</li>
-                        <li>✔ Set default action on repeat order</li>
-                        <li>✔ Redirect to cart/checkout on repeat</li>
-                        <li>✔ Auto refund to Wallet (TerraWallet)</li>
+                        <li><span style="color:white;">&#10003;</span> Partial order cancellation</li>
+                        <li><span style="color:white;">&#10003;</span> Disable cancel for specific product</li>
+                        <li><span style="color:white;">&#10003;</span> Upload image with cancel request</li>
+                        <li><span style="color:white;">&#10003;</span> Withdraw cancellation request</li>
+                        <li><span style="color:white;">&#10003;</span> Disable cancel by payment method</li>
+                        <li><span style="color:white;">&#10003;</span> Disable cancel by customer group</li>
+                        <li><span style="color:white;">&#10003;</span> Set default action on repeat order</li>
+                        <li><span style="color:white;">&#10003;</span> Redirect to cart/checkout on repeat</li>
+                        <li><span style="color:white;">&#10003;</span> Auto refund to Wallet (TerraWallet)</li>
                     </ul>
                     <h4 class="pi-bottom-banner">💰 Just <?php echo esc_html(PISOL_CORW_PRICE); ?></h4>
                     <h4 class="pi-bottom-banner">🔥 Unlock all features and grow your sales!</h4>

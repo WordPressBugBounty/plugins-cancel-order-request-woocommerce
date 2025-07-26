@@ -4,7 +4,7 @@ Donate link: piwebsolution.com
 Tags: order again, re-order, cancel order, woocommerce cancel order, return, refund
 Requires at least: 3.0.1
 Tested up to: 6.8
-Stable tag: 1.3.4.7
+Stable tag: 1.3.4.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -192,6 +192,9 @@ Yes the Free version and PRO version both are HPOS compatible
 19. Auto refund in the customer wallet
 
 == Changelog ==
+
+= 1.3.4.9 =
+* code optimized for cancel order request plugin
 
 = 1.3.4.7 =
 * Cancel order request plugin tested for WC 10.0.2
