@@ -4,7 +4,7 @@ Donate link: piwebsolution.com
 Tags: order again, re-order, cancel order, woocommerce cancel order, return, refund
 Requires at least: 3.0.1
 Tested up to: 6.8
-Stable tag: 1.3.4.9
+Stable tag: 1.3.4.10
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -26,7 +26,7 @@ Replace WooCommerce cancel order button with order cancellation request button, 
 &#9989; **Hide cancellation request button** after a certain period of time.
 &#9989; Give **list of cancellation reason** for user to select from
 &#9989; View order **detail link added in the email send to the customer**, you have the option to add this link for Registered customer or Guest customer or both
-&#9989; **Guest customer can request order cancellation**, from the link given in the order detail page (Thank your page)
+&#9989; **Guest customer can request order cancellation**, from the link given in the order detail page (Thank you page)
 &#9989; Cancellation reason is auto added in the **Order note**
 &#9989; Auto refund as store credit discount coupon
 &#9989; Give option to customer to accept direct refund as store credit coupon, this way you can keep the customer money in your store
@@ -35,11 +35,11 @@ Replace WooCommerce cancel order button with order cancellation request button, 
 = Repeat Order option =
 With our extension you can integrate and display the button “re-order”, “repeat order” on the overview page. 
 
-This allows your customer to place the same order easily without going through you site to find the same product again, which they purchased in the past.
+This allows your customer to place the same order easily without going through your site to find the same product again, which they purchased in the past.
 
 &#9989; Enable repeat order button based on the order status or on all the order
 &#9989; If the customer cart is empty it directly put the product in the **customer cart**
-&#9989; If customer has some other product in cart, then they are given an option of either **merging it with there cart or replacing there existing cart**
+&#9989; If customer has some other product in cart, then they are given an option of either **merging it with their cart or replacing their existing cart**
 &#9989; If the ordered product no longer exist there it gives them the name of the product that cant be added to the cart (remaining other products will be added)
 &#9989; If the product variation has changed then it gives them message that **they need to add that product manually** 
 &#9989; Options to customize the text of the button and message shown
@@ -57,10 +57,10 @@ Pro version offers all the feature of the free version plus this extra features
 &#9989; Disable cancellation request option based on the Customer group
 &#9989; Set default action on repeat order
 &#9989; Redirect to cart or checkout page once repeat order product are added in cart
-&#9989; Admin will get an email that will show the product and there quantity that user has requested for cancellation 
-&#9989; Customer will also get an email static there cancellation request is submitted, it will also show the product quantity user has requested for cancellation.
+&#9989; Admin will get an email that will show the product and their quantity that user has requested for cancellation 
+&#9989; Customer will also get an email stating their cancellation request is submitted, it will also show the product quantity user has requested for cancellation.
 &#9989; Auto refund in TerraWallet
-&#9989; Give option to customer to accept direct refund in there Wallet (TerraWallet) / [As a store credit discount coupon](https://wordpress.org/plugins/add-coupon-by-link-for-woocommerce/)
+&#9989; Give option to customer to accept direct refund in their Wallet (TerraWallet) / [As a store credit discount coupon](https://wordpress.org/plugins/add-coupon-by-link-for-woocommerce/)
 
 
 
@@ -115,16 +115,16 @@ Yes, they can send cancellation request too.
 They have the cancellation request link on the thank you page, the link for the order detail page is also added in the email send to guest customer so they can go to this thank you page and access this cancellation request button
 
 = Don't want customer to submit cancellation request with reason =
-There is option in the plugin to make the reason as required field, when you have reason selection option as well then user must wither select a reason or describe the reason
+There is option in the plugin to make the reason as required field, when you have reason selection option as well then user must either select a reason or describe the reason
 
 = I want to show repeat order button on order that failed =
 Yes you can enable the repeat order button on specific order status, or on all the orders
 
 = What will happen to the product that are in user cart when repeat order is clicked =
-If there cart is empty then it will directly put the product in the cart and show them success message. If they have product in there cart then it will show them an option to either merge the product in existing cart product or replace the existing cart product
+If their cart is empty then it will directly put the product in the cart and show them success message. If they have product in their cart then it will show them an option to either merge the product in existing cart product or replace the existing cart product
 
 = What if there old order has some product that is out of stock or not sold any more =
-In that case the plugin will add all other product to the cart and inform the customer that certain product cant be added to the cart
+In that case the plugin will add all other product to the cart and inform the customer that certain product can't be added to the cart
 
 = Will it show order again button on the View order and Order success page =
 Yes, you also have the option to disable order again button as well
@@ -149,7 +149,7 @@ This is available in Pro version it allows you to disable the cancellation reque
 = I want to disable the cancellation request option for specific group of customer =
 This is available in the Pro version, it allows you to disable the cancellation option based on the user role 
 
-= Does Repeat Order / Reorder plugin share any of my data or my customer date? (GDPR) =
+= Does Repeat Order / Reorder plugin share any of my data or my customer data? (GDPR) =
 No, Repeat Order / Repeat order will keep all your data inside your own WordPress. There is no data transmitted to us or a third party service.
 
 = Does it allow Partial cancellation of order =
@@ -182,13 +182,13 @@ Yes the Free version and PRO version both are HPOS compatible
 9. Email send to customer when order cancellation request is rejected
 10. Email send to customer when order cancellation request is accepted
 11. Email send to customer when new order cancellation request is received
-12. Custoemr can raise a cancellation request from the order detail page
-13. Repurcahse option
+12. Customer can raise a cancellation request from the order detail page
+13. Repurchase option
 14. Popup shown when repeat order button is clicked 
 15. Woocommerce cancel order plugin repeat order button on the order detail page
 16. Pro version allows you to cancel specific product from the order 
 17. Issue refund to the wallet 
-18. Woocommerce orer cancel plugin allow auto cencellation of order
+18. Woocommerce order cancel plugin allow auto cancellation of order
 19. Auto refund in the customer wallet
 
 == Changelog ==

@@ -54,9 +54,9 @@ class pisol_corw_reorder_option{
 
             array('field'=>'pi_corw_reorder_error_background_color', 'label'=>__('Error popup background color','cancel-order-request-woocommerce'),'type'=>'color', 'default'=>'#ff4747', 'desc'=>__('The toast dialog that open on success or to give options','cancel-order-request-woocommerce')),
 
-            array('field'=>'pi_corw_reorder_button_background_color', 'label'=>__('Button in popup background color','cancel-order-request-woocommerce'),'type'=>'color', 'default'=>'#cccccc', 'desc'=>__('Background color of the the button in popup','cancel-order-request-woocommerce')),
+            array('field'=>'pi_corw_reorder_button_background_color', 'label'=>__('Button in popup background color','cancel-order-request-woocommerce'),'type'=>'color', 'default'=>'#cccccc', 'desc'=>__('Background color of the button in popup','cancel-order-request-woocommerce')),
             
-            array('field'=>'pi_corw_reorder_button_text_color', 'label'=>__('Button in popup text color','cancel-order-request-woocommerce'),'type'=>'color', 'default'=>'#000000', 'desc'=>__('Text color of the the button in popup','cancel-order-request-woocommerce')),
+            array('field'=>'pi_corw_reorder_button_text_color', 'label'=>__('Button in popup text color','cancel-order-request-woocommerce'),'type'=>'color', 'default'=>'#000000', 'desc'=>__('Text color of the button in popup','cancel-order-request-woocommerce')),
         );
 
         if($this->this_tab == $this->active_tab){
