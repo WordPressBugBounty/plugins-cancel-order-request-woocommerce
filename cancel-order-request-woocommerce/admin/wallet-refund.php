@@ -55,7 +55,10 @@ class pisol_corw_wallet_refund_setting{
     function tab(){
         ?>
         <a class=" px-3 text-light d-flex align-items-center  border-left border-right  <?php echo ($this->active_tab == $this->this_tab ? 'bg-primary' : 'bg-secondary'); ?>" href="<?php echo admin_url( 'admin.php?page='.sanitize_text_field($_GET['page']).'&tab='.$this->this_tab ); ?>">
-           <span class="dashicons dashicons-money-alt"></span> <?php _e( $this->tab_name, 'http2-push-content' ); ?> 
+           <span class="dashicons dashicons-money-alt"></span> <?php _e( $this->tab_name, 'cancel-order-request-woocommerce' ); ?> 
+        </a>
+        <a class=" px-3 text-light d-flex align-items-center  border-left border-right  bg-secondary" href="https://www.piwebsolution.com/user-documentation-cancel-order-request-for-woocommerce/" target="_blank" title="Documentation">
+           <span class="dashicons dashicons-book"></span> <?php _e( 'Documentation', 'cancel-order-request-woocommerce' ); ?> 
         </a>
         <?php
     }

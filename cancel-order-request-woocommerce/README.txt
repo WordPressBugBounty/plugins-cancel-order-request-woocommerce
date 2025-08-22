@@ -4,7 +4,7 @@ Donate link: piwebsolution.com
 Tags: order again, re-order, cancel order, woocommerce cancel order, return, refund
 Requires at least: 3.0.1
 Tested up to: 6.8
-Stable tag: 1.3.4.10
+Stable tag: 1.3.4.11
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -46,7 +46,7 @@ This allows your customer to place the same order easily without going through y
 
 == Get pro version == 
 
-[Buy Pro](https://www.piwebsolution.com/cart/?add-to-cart=13147&variation_id=15708) | [Try pro version on test site](http://websitemaintenanceservice.in/cancel_demo/)
+[Buy Pro](https://www.piwebsolution.com/cart/?add-to-cart=13147&variation_id=15708) | [Try pro version on test site](http://websitemaintenanceservice.in/cancel_demo/) | [Documentation](https://www.piwebsolution.com/user-documentation-cancel-order-request-for-woocommerce/)
 
 Pro version offers all the feature of the free version plus this extra features
 &#9989; Allows your customer to place **partial order cancellation request**: Say if they have ordered 2 product A & B and they only want to cancel product A then they can place a cancellation request for product A only.
