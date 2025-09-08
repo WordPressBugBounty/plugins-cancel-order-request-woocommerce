@@ -48,7 +48,7 @@ class pisol_corw_menu{
                         <div class='bg-dark'>
                         <div class="pisol-row">
                             <div class="col-12 col-sm-2 py-2 d-flex align-items-center justify-content-center">
-                                    <a href="https://www.piwebsolution.com/" target="_blank"><img id="pi-logo" class="img-fluid ml-2" src="<?php echo plugin_dir_url( __FILE__ ); ?>img/pi-web-solution.png"></a>
+                                    <a href="https://www.piwebsolution.com/" target="_blank"><img id="pi-logo" class="img-fluid ml-2" src="<?php echo plugin_dir_url( __FILE__ ); ?>img/pi-web-solution.svg"></a>
                             </div>
                             <div class="col-12 col-sm-10 d-flex text-center small">
                                 <nav id="pisol-navbar" class="navbar navbar-expand-lg navbar-light mr-0 ml-auto">
@@ -78,6 +78,7 @@ class pisol_corw_menu{
         </div>
         </div>
         <?php
+        $this->support();
     }
 
     function promotion(){
@@ -113,6 +114,21 @@ class pisol_corw_menu{
             </div>
         </div>
         
+        <?php
+    }
+
+    function support(){
+        $website_url = home_url();
+        $plugin_name = $this->plugin_name;
+        ?>
+        <form action="https://www.piwebsolution.com/quick-support/" method="post" target="_blank" style="display:inline; position:fixed; bottom:30px; right:35px; z-index:9999;" >
+            <input type="hidden" name="website_url" value="<?php echo esc_attr( $website_url ); ?>">
+            <input type="hidden" name="plugin_name" value="<?php echo esc_attr( $plugin_name ); ?>">
+            <button type="submit" style="background:none;border:none;cursor:pointer;padding:0;">
+                <img src="<?php echo esc_url( plugin_dir_url( __FILE__ ) ); ?>img/chat.png" 
+                    alt="Live Support" title="Quick Support" style="width:60px;height:60px;">
+            </button>
+        </form>
         <?php
     }
 
