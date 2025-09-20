@@ -3,6 +3,7 @@
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/pisol.class.form.php';
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-emails.php';
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/review.php';
+require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/Pro_Warning.php';
 
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/menu.php';
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/basic.php';
