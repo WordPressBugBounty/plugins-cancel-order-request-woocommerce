@@ -53,11 +53,12 @@ class pisol_corw_wallet_refund{
         $wallet = self::has_supported_wallet();
 
         if($wallet == 'terra-wallet' && function_exists('woo_wallet')){
-            $refund_reason =  __( 'Wallet refund #', 'woo-wallet' ) . $order->get_order_number();
+            $refund_reason =  __( 'Wallet refund #', 'cancel-order-request-woocommerce' ) . $order->get_order_number();
 
             $transaction_id = woo_wallet()->wallet->credit( $order->get_customer_id(), $refund_amount, $refund_reason, array( 'currency' => $order->get_currency( 'edit' ), 'for' => 'refund' ) );
 
-            $order->add_order_note(sprintf(__('Wallet refund of %s credited. Transaction ID: %s', 'cancel-order-request-woocommerce'), wc_price($refund_amount), $transaction_id));
+            // translators: %1$s: refund amount, %2$s: transaction ID.
+            $order->add_order_note(sprintf(__('Wallet refund of %1$s credited. Transaction ID: %2$s', 'cancel-order-request-woocommerce'), wc_price($refund_amount), $transaction_id));
 
         }elseif($wallet == 'add-coupon-by-link-woocommerce'){
             $coupon_code = 'refund-' . $order->get_id().'-'.wp_generate_password(6, false);
@@ -67,6 +68,7 @@ class pisol_corw_wallet_refund{
             $coupon->set_discount_type('pisol_acblw_store_credit');
             $coupon->set_amount($refund_amount);
             $order_no = method_exists($order, 'get_order_number') ? $order->get_order_number() : $order->get_id();
+            // translators: %s: order number.
             $coupon->set_description(sprintf(__('Store credit coupon given as a refund for order #%s', 'cancel-order-request-woocommerce'), $order_no));
             //get billing email and set as the email for the coupon
             $emails = array();
@@ -82,8 +84,10 @@ class pisol_corw_wallet_refund{
             $coupon->set_email_restrictions($emails);
             $coupon->save();
 
-            $order->add_order_note(sprintf(__('Store credit coupon %s of %s amount was for email id %s as a refund', 'cancel-order-request-woocommerce'), $coupon_code, wc_price($refund_amount), implode(', ', $emails)));
+            // translators: %1$s: coupon code, %2$s: refund amount, %3$s: email IDs.
+            $order->add_order_note(sprintf(__('Store credit coupon %1$s of %2$s amount was for email id %3$s as a refund', 'cancel-order-request-woocommerce'), $coupon_code, wc_price($refund_amount), implode(', ', $emails)));
 
+            // translators: %s: order ID.
             $email_desc = sprintf(__('This coupon was given to you as a refund for the order #%s', 'cancel-order-request-woocommerce'), $order->get_id());
             do_action( 'woocommerce_store_credit_assigned', $coupon_code, $email_desc );
         }

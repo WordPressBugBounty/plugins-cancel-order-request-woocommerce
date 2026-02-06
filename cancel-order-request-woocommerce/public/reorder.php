@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 class pisol_corw_reorder_front{
 
@@ -30,7 +33,7 @@ class pisol_corw_reorder_front{
             $url = admin_url("admin-ajax.php?action=pi_reorder&order_id={$order_id}");
             $label = esc_html(get_option('pi_corw_reorder_button_text',__( 'Repeat Order', 'cancel-order-request-woocommerce' )));
 
-            printf('<a href="%s" class="woocommerce-button button pi_reorder">%s</a>', $url, $label);
+            printf('<a href="%s" class="woocommerce-button button pi_reorder">%s</a>', esc_url($url), esc_html($label));
         }
     }
 
@@ -69,6 +72,7 @@ class pisol_corw_reorder_front{
         $order = wc_get_order($order_id);
 
         if(empty($order)){
+            // translators: %s: order ID.
             wp_send_json(self::message(__('Error','cancel-order-request-woocommerce'),sprintf(__('Order #%s does not exist', 'cancel-order-request-woocommerce'),esc_html($order_id)), 'error'));
         } 
 
@@ -89,6 +93,7 @@ class pisol_corw_reorder_front{
         $order = wc_get_order($order_id);
 
         if(empty($order)){
+            // translators: %s: order ID.
             wp_send_json(self::message(__('Error','cancel-order-request-woocommerce'),sprintf(__('Order #%s does not exist', 'cancel-order-request-woocommerce'),esc_html($order_id)), 'error'));
         }
 
@@ -106,6 +111,7 @@ class pisol_corw_reorder_front{
         $order = wc_get_order($order_id);
 
         if(empty($order)){
+            // translators: %s: order ID.
             wp_send_json(self::message(__('Error','cancel-order-request-woocommerce'),sprintf(__('Order #%s does not exist', 'cancel-order-request-woocommerce'),esc_html($order_id)), 'error'));
         }
 

@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 class pisol_corw_dependency_manager {
 
@@ -22,7 +25,7 @@ class pisol_corw_dependency_manager {
 
                     jQuery.post(ajaxurl, {
                         action: 'install_dependency_plugin',
-                        nonce: '<?php echo wp_create_nonce('install_dependency_nonce'); ?>'
+                        nonce: '<?php echo esc_attr(wp_create_nonce('install_dependency_nonce')); ?>'
                     }, function(response) {
                         alert(response.data.message);
                         if (response.success) {

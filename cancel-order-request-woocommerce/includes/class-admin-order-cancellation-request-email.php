@@ -128,6 +128,7 @@ if(!class_exists('WC_Email_Admin_Order_Cancel_Request')):
                 'recipient' => array(
                     'title'         => __( 'Recipient(s)', 'cancel-order-request-woocommerce' ),
                     'type'          => 'text',
+                    // translators: %s: email address.
                     'description'   => sprintf( __( 'Enter recipients (comma separated) for this email. Defaults to <code>%s</code>.', 'cancel-order-request-woocommerce' ), esc_attr( get_option('admin_email') ) ),
                     'placeholder'   => '',
                     'default'       => esc_attr( get_option('admin_email') ),

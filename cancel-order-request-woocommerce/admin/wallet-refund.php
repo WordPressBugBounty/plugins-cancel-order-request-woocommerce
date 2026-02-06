@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 class pisol_corw_wallet_refund_setting{
 
@@ -54,11 +57,11 @@ class pisol_corw_wallet_refund_setting{
 
     function tab(){
         ?>
-        <a class=" px-3 text-light d-flex align-items-center  border-left border-right  <?php echo ($this->active_tab == $this->this_tab ? 'bg-primary' : 'bg-secondary'); ?>" href="<?php echo admin_url( 'admin.php?page='.sanitize_text_field($_GET['page']).'&tab='.$this->this_tab ); ?>">
-           <span class="dashicons dashicons-money-alt"></span> <?php _e( $this->tab_name, 'cancel-order-request-woocommerce' ); ?> 
+        <a class=" px-3 text-light d-flex align-items-center  border-left border-right  <?php echo ($this->active_tab == $this->this_tab ? 'bg-primary' : 'bg-secondary'); ?>" href="<?php echo esc_url(admin_url( 'admin.php?page='.sanitize_text_field($_GET['page']).'&tab='.$this->this_tab )); ?>">
+           <span class="dashicons dashicons-money-alt"></span> <?php echo esc_html($this->tab_name); ?> 
         </a>
         <a class=" px-3 text-light d-flex align-items-center  border-left border-right  bg-secondary" href="https://www.piwebsolution.com/user-documentation-cancel-order-request-for-woocommerce/" target="_blank" title="Documentation">
-           <span class="dashicons dashicons-book"></span> <?php _e( 'Documentation', 'cancel-order-request-woocommerce' ); ?> 
+           <span class="dashicons dashicons-book"></span> <?php esc_html_e( 'Documentation', 'cancel-order-request-woocommerce' ); ?> 
         </a>
         <?php
     }

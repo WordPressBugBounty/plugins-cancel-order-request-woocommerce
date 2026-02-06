@@ -1,17 +1,26 @@
+<?php if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
+
 <div class="pi-corw-container">
-<form action="<?php echo admin_url('admin-post.php'); ?>" method="post">
-    <h4 class="mt-5"><?php printf(__('Request to cancel order #%s', 'cancel-order-request-woocommerce'), $order_no); ?></h4>
+<form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="post">
+    <h4 class="mt-5"><?php 
+    // translators: %s: order number.
+    printf(esc_html__('Request to cancel order #%s', 'cancel-order-request-woocommerce'), esc_html($order_no)); 
+    ?></h4>
     <?php if(!empty($admin_message)): ?>
-    <div class="pi-alert-box"><?php echo strip_tags($admin_message, '<br><strong><b>'); ?></div>
+    <div class="pi-alert-box"><?php echo wp_kses_post(strip_tags($admin_message, '<br><strong><b>')); ?></div>
     <?php endif; ?>
     
-    <?php echo $predefined_reasons; ?>
+    <?php 
+    //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+    echo $predefined_reasons; ?>
 
     <?php if(pisol_corw_wallet_refund::give_wallet_refund_option() && pisol_corw_wallet_refund::waller_refund_enabled()): 
         $wallet_refund_text = get_option('pi_corw_give_refund_in_wallet', __('Credit refund amount in the wallet','cancel-order-request-woocommerce'));    
     ?>
     <label class="pi-wallet-refund" for="do_wallet_refund">
-        <input type="checkbox" name="do_wallet_refund" id="do_wallet_refund"value="1" checked="checked" class="mr-5" /> <?php echo $wallet_refund_text; ?>
+        <input type="checkbox" name="do_wallet_refund" id="do_wallet_refund"value="1" checked="checked" class="mr-5" /> <?php 
+        //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+        echo $wallet_refund_text; ?>
     </label>
     <?php endif; ?>
  

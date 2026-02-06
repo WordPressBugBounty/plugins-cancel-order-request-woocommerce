@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 class pisol_corw_new_order_status{
     function __construct(){
@@ -18,6 +21,7 @@ class pisol_corw_new_order_status{
             'exclude_from_search' => false, 
             'show_in_admin_all_list' => true, 
             'show_in_admin_status_list' => true, 
+            // translators: %s: number of orders with this status.
             'label_count' => _n_noop('Cancel Request <span class="count">(%s)</span>', 'Cancel Requests <span class="count">(%s)</span>', 'cancel-order-request-woocommerce')
             )
         );

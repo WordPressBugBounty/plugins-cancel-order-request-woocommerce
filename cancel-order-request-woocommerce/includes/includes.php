@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/pisol.class.form.php';
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-emails.php';

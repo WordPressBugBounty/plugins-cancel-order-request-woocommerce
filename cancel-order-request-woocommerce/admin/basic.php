@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 class pisol_corw_basic_option{
 
@@ -90,8 +93,8 @@ class pisol_corw_basic_option{
     function tab(){
         $this->tab_name = __('Basic setting', 'cancel-order-request-woocommerce');
         ?>
-        <a class=" px-3 text-light d-flex align-items-center  border-left border-right  <?php echo ($this->active_tab == $this->this_tab ? 'bg-primary' : 'bg-secondary'); ?>" href="<?php echo admin_url( 'admin.php?page='.sanitize_text_field($_GET['page']).'&tab='.$this->this_tab ); ?>">
-           <span class="dashicons dashicons-admin-generic"></span> <?php echo $this->tab_name; ?> 
+        <a class=" px-3 text-light d-flex align-items-center  border-left border-right  <?php echo ($this->active_tab == $this->this_tab ? 'bg-primary' : 'bg-secondary'); ?>" href="<?php echo esc_url(admin_url( 'admin.php?page='.sanitize_text_field($_GET['page']).'&tab='.$this->this_tab )); ?>">
+           <span class="dashicons dashicons-admin-generic"></span> <?php echo esc_html($this->tab_name); ?> 
         </a>
         <?php
     }
@@ -105,7 +108,7 @@ class pisol_corw_basic_option{
                 new pisol_class_form_corw($setting, $this->setting_key);
             }
         ?>
-        <input type="submit" class="my-3 btn btn-primary btn-md" value="<?php _e('Save Option','cancel-order-request-woocommerce'); ?>" />
+        <input type="submit" class="my-3 btn btn-primary btn-md" value="<?php esc_attr_e('Save Option','cancel-order-request-woocommerce'); ?>" />
         </form>
        <?php
     }

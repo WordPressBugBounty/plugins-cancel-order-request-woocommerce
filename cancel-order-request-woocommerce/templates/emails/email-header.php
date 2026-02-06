@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=<?php bloginfo( 'charset' ); ?>" />
 		<meta content="width=device-width, initial-scale=1.0" name="viewport">
-		<title><?php echo get_bloginfo( 'name', 'display' ); ?></title>
+		<title><?php echo esc_html(get_bloginfo( 'name', 'display' )); ?></title>
 	</head>
 	<body <?php echo is_rtl() ? 'rightmargin' : 'leftmargin'; ?>="0" marginwidth="0" topmargin="0" marginheight="0" offset="0">
 		<table width="100%" id="outer_wrapper">
@@ -52,7 +52,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 												<table border="0" cellpadding="0" cellspacing="0" width="100%" id="template_header">
 													<tr>
 														<td id="header_wrapper">
-															<h1><?php echo strip_tags( $email_heading,'<a>' ); ?></h1>
+															<h1><?php echo wp_kses_post(strip_tags( $email_heading,'<a>' )); ?></h1>
 														</td>
 													</tr>
 												</table>

@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 class pisol_corw_order_detail_link_in_email{
 
@@ -16,8 +19,10 @@ class pisol_corw_order_detail_link_in_email{
                 $msg = self::orderDetailLink($order, __('Click to view order details', 'cancel-order-request-woocommerce'));
 
                 if($order->get_user() === false && in_array('guest', $add_link_for)){
+                    //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                     echo $msg;
                 }elseif($order->get_user() !== false && in_array('registered', $add_link_for)){
+                    //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                     echo $msg;
                 }
         }

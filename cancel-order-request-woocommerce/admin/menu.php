@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 class pisol_corw_menu{
 
@@ -48,7 +51,7 @@ class pisol_corw_menu{
                         <div class='bg-dark'>
                         <div class="pisol-row">
                             <div class="col-12 col-sm-2 py-2 d-flex align-items-center justify-content-center">
-                                    <a href="https://www.piwebsolution.com/" target="_blank"><img id="pi-logo" class="img-fluid ml-2" src="<?php echo plugin_dir_url( __FILE__ ); ?>img/pi-web-solution.svg"></a>
+                                    <a href="https://www.piwebsolution.com/" target="_blank"><img id="pi-logo" class="img-fluid ml-2" src="<?php echo esc_url(plugin_dir_url( __FILE__ )); ?>img/pi-web-solution.svg"></a>
                             </div>
                             <div class="col-12 col-sm-10 d-flex text-center small">
                                 <nav id="pisol-navbar" class="navbar navbar-expand-lg navbar-light mr-0 ml-auto">
@@ -105,10 +108,9 @@ class pisol_corw_menu{
                         <li><span style="color:white;">&#10003;</span> Redirect to cart/checkout on repeat</li>
                         <li><span style="color:white;">&#10003;</span> Auto refund to Wallet (TerraWallet)</li>
                     </ul>
-                    <h4 class="pi-bottom-banner">💰 Just <?php echo esc_html(PISOL_CORW_PRICE); ?></h4>
-                    <h4 class="pi-bottom-banner">🔥 Unlock all features and grow your sales!</h4>
+                    <h4 class="pi-bottom-banner">💰 <?php echo esc_html(PISOL_CORW_PRICE); ?> <small>Billed yearly</small></h4>
                     <div class="text-center pb-3 pt-2">
-                        <a class="btn btn-primary btn-md" href="<?php echo PISOL_CORW_BUY_URL; ?>&utm_ref=bottom_link" target="_blank">🔓 Unlock Pro Now – Limited Time Price!</a>
+                        <a class="btn btn-primary btn-md" href="<?php echo esc_url(PISOL_CORW_BUY_URL); ?>&utm_ref=bottom_link" target="_blank">🔓 Unlock Pro Now – Limited Time Price!</a>
                     </div>
                 </div>
             </div>

@@ -24,10 +24,12 @@ echo "\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n\n";
 /* translators: %s: Customer billing full name */
 
 if(!empty($predefined_reason)):
+// translators: %s: selected reason.
 echo sprintf( esc_html__( 'Selected reason: %s', 'cancel-order-request-woocommerce' ), esc_html( $predefined_reason ) ) . "\n\n";
 endif;
 
 if(!empty($cancellation_reason)):
+// translators: %s: order cancellation reason.
 echo sprintf( esc_html__( 'Order cancellation reason: %s', 'cancel-order-request-woocommerce' ), esc_html( $cancellation_reason ) ) . "\n\n";
 endif;
 

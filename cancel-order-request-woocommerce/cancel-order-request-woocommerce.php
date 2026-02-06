@@ -9,21 +9,21 @@
  * that starts the plugin.
  *
  * @link              piwebsolution.com
- * @since             1.3.4.14
+ * @since             1.3.4.22
  * @package           Cancel_Order_Request_Woocommerce
  *
  * @wordpress-plugin
- * Plugin Name:       Cancel order request for WooCommerce
- * Plugin URI:        piwebsolution.com/cancel-order-request-woocommerce
+ * Plugin Name:       Cancel order / Refund request for WooCommerce
+ * Plugin URI:        https://www.piwebsolution.com/product/cancel-order-request-repeat-order-re-order-for-woocommerce/
  * Description:       Gives option to replace Cancel order button with Cancel order request button, so user can send cancellation request
- * Version:           1.3.4.14
+ * Version:           1.3.4.22
  * Author:            PI Websolution
- * Author URI:        piwebsolution.com
+ * Author URI:        https://piwebsolution.com
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       cancel-order-request-woocommerce
  * Domain Path:       /languages
- * WC tested up to: 10.2.1
+ * WC tested up to: 10.4.3
  */
 
 // If this file is called directly, abort.
@@ -37,7 +37,7 @@ if(is_plugin_active( 'cancel-order-request-woocommerce-pro/cancel-order-request-
     add_action( 'admin_notices', function () {
         ?>
         <div class="error notice">
-            <p><?php _e( 'Please deactivate Pro version of Cancel order request for WooCommerce', 'cancel-order-request-woocommerce' ); ?></p>
+            <p><?php esc_html_e( 'Please deactivate Pro version of Cancel order request for WooCommerce', 'cancel-order-request-woocommerce' ); ?></p>
         </div>
         <?php
     } );
@@ -49,7 +49,7 @@ if(!is_plugin_active( 'woocommerce/woocommerce.php')){
     add_action( 'admin_notices', function () {
         ?>
         <div class="error notice">
-            <p><?php _e( 'Please Install and Activate WooCommerce plugin, without that this plugin can\'t work', 'cancel-order-request-woocommerce' ); ?></p>
+            <p><?php esc_html_e( 'Please Install and Activate WooCommerce plugin, without that this plugin can\'t work', 'cancel-order-request-woocommerce' ); ?></p>
         </div>
         <?php
     } );
@@ -58,13 +58,13 @@ if(!is_plugin_active( 'woocommerce/woocommerce.php')){
 
 /**
  * Currently plugin version.
- * Start at version 1.3.4.14 and use SemVer - https://semver.org
+ * Start at version 1.3.4.22 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'CANCEL_ORDER_REQUEST_WOOCOMMERCE_VERSION', '1.3.4.14' );
+define( 'CANCEL_ORDER_REQUEST_WOOCOMMERCE_VERSION', '1.3.4.22' );
 
 define('PISOL_CORW_BASE_DIR', __DIR__);
-define('PISOL_CORW_PRICE', '$19');
+define('PISOL_CORW_PRICE', '$1.5 / month');
 define('PISOL_CORW_BUY_URL', 'https://www.piwebsolution.com/cart/?add-to-cart=13147&variation_id=13148&utm_campaign=cancel-order&utm_source=website&utm_medium=direct-buy');
 
 /**
@@ -115,7 +115,7 @@ add_action( 'plugin_action_links_' . plugin_basename( __FILE__ ),  'pisol_cancel
 function pisol_cancel_order_request_plugin_link( $links ) {
     $links = array_merge( array(
         '<a href="' . esc_url( admin_url( '/admin.php?page=pisol-cancel-order-request' ) ) . '">' . __( 'Settings', 'cancel-order-request-woocommerce' ) . '</a>',
-        '<a style="color:#0a9a3e; font-weight:bold;" target="_blank" href="https://wordpress.org/support/plugin/cancel-order-request-woocommerce/reviews/?filter=5#wp-bbp_topic_content-wrap">' . __( 'Send suggestions to improve','cancel-order-request-woocommerce' ) . '</a>', '<a style="color:#FF0000; font-weight:bold;" target="_blank" href="'.esc_url(PISOL_CORW_BUY_URL).'">' . __( 'Get PRO','cancel-order-request-woocommerce' ) . '</a>'
+        '<a style="color:#0a9a3e; font-weight:bold;" target="_blank" href="https://wordpress.org/support/plugin/cancel-order-request-woocommerce/reviews/">' . __( 'Send suggestions to improve','cancel-order-request-woocommerce' ) . '</a>', '<a style="color:#FF0000; font-weight:bold;" target="_blank" href="'.esc_url(PISOL_CORW_BUY_URL).'">' . __( 'Get PRO','cancel-order-request-woocommerce' ) . '</a>'
     ), $links );
     return $links;
 }
@@ -137,7 +137,7 @@ add_action('admin_init', function (){
  * then kicking off the plugin from this point in the file does
  * not affect the page life cycle.
  *
- * @since    1.3.4.14
+ * @since    1.3.4.22
  */
 function run_cancel_order_request_woocommerce() {
 

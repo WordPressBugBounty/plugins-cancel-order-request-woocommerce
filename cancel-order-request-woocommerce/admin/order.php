@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 class pisol_corw_cancellation_reason{
 
@@ -17,11 +20,11 @@ class pisol_corw_cancellation_reason{
             ?>
             <div class="order_data_column" style="width:100%;">
             <?php if(!empty($predefined_reason)):?>
-            <h3><?php _e('Selected reason for cancellation: ','cancel-order-request-woocommerce'); ?></h3>
-            <?php echo $predefined_reason; ?>
+            <h3><?php esc_html_e('Selected reason for cancellation: ','cancel-order-request-woocommerce'); ?></h3>
+            <?php echo wp_kses_post($predefined_reason); ?>
             <?php endif; ?>
 
-            <h3><?php _e('Cancellation reason: ','cancel-order-request-woocommerce'); ?></h3>
+            <h3><?php esc_html_e('Cancellation reason: ','cancel-order-request-woocommerce'); ?></h3>
             <?php
                 echo !empty($reason) ? esc_html($reason) : '-';
             ?>

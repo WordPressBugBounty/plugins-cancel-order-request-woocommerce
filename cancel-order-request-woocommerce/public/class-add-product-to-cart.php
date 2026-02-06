@@ -82,6 +82,7 @@ class pisol_corw_addProductToCart{
             return pisol_corw_reorder_front::message(__('Success','cancel-order-request-woocommerce'),__('All products from the order added to the cart', 'cancel-order-request-woocommerce').$navigation_link, 'success');
         }else{
             $product_list = self::listOfProductThatCantBeAdded($not_added);
+            // translators: %s: product list.
             return pisol_corw_reorder_front::message(__('Warning','cancel-order-request-woocommerce'),sprintf(__('Below products have some changes in them so they cant be added, consider adding them manually %s', 'cancel-order-request-woocommerce'), $product_list), 'error');
         }
     }

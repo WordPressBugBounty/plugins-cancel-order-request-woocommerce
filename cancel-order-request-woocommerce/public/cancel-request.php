@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 class pisol_corw_cancel_request{
 
@@ -79,7 +82,7 @@ class pisol_corw_cancel_request{
 
         $order_placement_time = $order_placement_time_obj->date('Y/m/d H:i');
 
-        $cancellation_allowed_till = date('Y/m/d H:i', strtotime($order_placement_time. "+ {$hide_after} minutes"));
+        $cancellation_allowed_till = wp_date('Y/m/d H:i', strtotime($order_placement_time. "+ {$hide_after} minutes"));
 
         if(strtotime($present) > strtotime($cancellation_allowed_till)) return false;
 
@@ -91,12 +94,12 @@ class pisol_corw_cancel_request{
         $order_id = filter_input(INPUT_GET, 'order_id');
 
         if(empty($order_id)){
-            wp_die(__('Invalid request', 'cancel-order-request-woocommerce'), '', array('response' => 403));
+            wp_die(esc_html__('Invalid request', 'cancel-order-request-woocommerce'), '', array('response' => 403));
         }
 
         //verify nonce 
         if(!isset($_GET['_wpnonce']) || !wp_verify_nonce($_GET['_wpnonce'], 'order_cancel_request_'.$order_id)){
-            wp_die(__('Invalid request', 'cancel-order-request-woocommerce'), '', array('response' => 403));
+            wp_die(esc_html__('Invalid request', 'cancel-order-request-woocommerce'), '', array('response' => 403));
         }
 
         $admin_notice = pisol_corw_get_option('pi_corw_order_admin_notice', '');
@@ -151,7 +154,7 @@ class pisol_corw_cancel_request{
 
         //do nonce verification
         if(!isset($_POST['pi_cancellation_request_nonce']) || !wp_verify_nonce($_POST['pi_cancellation_request_nonce'], 'cancellation_request_'.$order_id)){
-            wp_die(__('Invalid request', 'cancel-order-request-woocommerce'), '', array('response' => 403));
+            wp_die(esc_html__('Invalid request', 'cancel-order-request-woocommerce'), '', array('response' => 403));
         }
 
         if(!self::reasonDescriptionGiven($reason, $predefined_reason)){
@@ -159,11 +162,12 @@ class pisol_corw_cancel_request{
             $order = wc_get_order($order_id);
 
             if(empty($order_id) || empty($order)){
-                wp_die(__('Wrong order id.', 'cancel-order-request-woocommerce'), '', array('response' => 403));
+                wp_die(esc_html__('Wrong order id.', 'cancel-order-request-woocommerce'), '', array('response' => 403));
             }
 
             $order_no = method_exists($order, 'get_order_number') ? $order->get_order_number() : $order->get_id();
-            $data['pi_corw_msg']['error'] = sprintf(__('Please specify a order cancellation reason for order no. #%s', 'cancel-order-request-woocommerce'), $order_no);
+            // translators: %s: order number.
+            $data['pi_corw_msg']['error'] = sprintf(esc_html__('Please specify a order cancellation reason for order no. #%s', 'cancel-order-request-woocommerce'), $order_no);
 
             if(function_exists('WC')){
                 WC()->session = new WC_Session_Handler();
@@ -179,7 +183,7 @@ class pisol_corw_cancel_request{
             self::recordCancellationRequest($order_id, $reason, $predefined_reason, $do_wallet_refund);
             wp_safe_redirect($redirect);
         }else{
-            wp_die(__('You do not have permissions to request cancellation for this order.', 'cancel-order-request-woocommerce'), '', array('response' => 403));
+            wp_die(esc_html__('You do not have permissions to request cancellation for this order.', 'cancel-order-request-woocommerce'), '', array('response' => 403));
         }
     }
 
@@ -269,6 +273,7 @@ class pisol_corw_cancel_request{
         if(function_exists('WC')){
             WC()->session = new WC_Session_Handler();
             WC()->session->init();
+            // translators: %s: order number.
             $data['pi_corw_msg']['success'] = sprintf(__('Order cancellation request submitted for order no. #%s', 'cancel-order-request-woocommerce'),$order_no);
             WC()->session->set( 'pi_crow_data', $data);
         }
@@ -307,14 +312,14 @@ class pisol_corw_cancel_request{
 
             $url = wp_nonce_url(admin_url("admin-ajax.php?action=pi_order_cancel_request_form&order_id={$order_id}"), 'order_cancel_request_'.$order_id);
             $order_status = $order->get_status();
-            echo '<span class="pi-corw-text">'.__('Want to cancel this order? ', 'cancel-order-request-woocommerce').'</span>';
+            echo '<span class="pi-corw-text">'.esc_html__('Want to cancel this order? ', 'cancel-order-request-woocommerce').'</span>';
             echo '<a href="'.esc_url($url).'" class="pi_cancel_request_form">';
-            _e('Click here','cancel-order-request-woocommerce');
+            echo esc_html__('Click here','cancel-order-request-woocommerce');
             echo '</a>';
         }else{
             $order_status = $order->get_status();
             if($order_status == 'cancel-request'){
-                _e('Your order cancellation request is submitted', 'cancel-order-request-woocommerce');
+                echo esc_html__('Your order cancellation request is submitted', 'cancel-order-request-woocommerce');
             }
         }
     }
