@@ -398,7 +398,7 @@ class pisol_class_form_corw{
         ?>
         <div id="row_<?php echo esc_attr($this->setting['field']); ?>" class="row py-4 border-bottom align-items-center <?php echo ( isset($this->setting['class']) ? esc_attr($this->setting['class']) : "" ); ?>">
             <div class="col-12">
-            <h2 class="mt-0 mb-0 <?php echo ( isset($this->setting['class_title']) ? esc_attr($this->setting['class_title']) : "" ); ?>"><?php echo $this->setting['label']; ?></h2>
+            <h2 class="mt-0 mb-0 <?php echo ( isset($this->setting['class_title']) ? esc_attr($this->setting['class_title']) : "" ); ?>"><?php echo wp_kses_post($this->setting['label']); ?></h2>
             </div>
         </div>
         <?php
