@@ -27,7 +27,8 @@ class Cancel_Order_Request_Woocommerce_Admin {
 			delete_option('pi_cord_do_activation_redirect');
 			if(!isset($_GET['activate-multi']))
 			{
-				wp_redirect("admin.php?page=pisol-cancel-order-request");
+				wp_safe_redirect(admin_url("admin.php?page=pisol-cancel-order-request"));
+				exit;
 			}
 		}
 	}

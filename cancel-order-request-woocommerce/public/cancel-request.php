@@ -98,7 +98,7 @@ class pisol_corw_cancel_request{
         }
 
         //verify nonce 
-        if(!isset($_GET['_wpnonce']) || !wp_verify_nonce($_GET['_wpnonce'], 'order_cancel_request_'.$order_id)){
+        if(!isset($_GET['_wpnonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_GET['_wpnonce'])), 'order_cancel_request_'.$order_id)){
             wp_die(esc_html__('Invalid request', 'cancel-order-request-woocommerce'), '', array('response' => 403));
         }
 
@@ -153,7 +153,7 @@ class pisol_corw_cancel_request{
         $do_wallet_refund = !empty($do_wallet_refund) ? 1 : 0;
 
         //do nonce verification
-        if(!isset($_POST['pi_cancellation_request_nonce']) || !wp_verify_nonce($_POST['pi_cancellation_request_nonce'], 'cancellation_request_'.$order_id)){
+        if(!isset($_POST['pi_cancellation_request_nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['pi_cancellation_request_nonce'])), 'cancellation_request_'.$order_id)){
             wp_die(esc_html__('Invalid request', 'cancel-order-request-woocommerce'), '', array('response' => 403));
         }
 

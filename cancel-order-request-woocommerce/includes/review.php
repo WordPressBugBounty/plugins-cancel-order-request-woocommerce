@@ -24,7 +24,7 @@ class pisol_corw_cancel_order_review{
         $this->slug = $slug;
         $this->activation_date = "pi_review_activation_date_{$this->slug}";
         $this->saved_value = "pi_review_saved_value_{$this->slug}";
-        $this->review_url = "https://wordpress.org/support/plugin/{$this->slug}/reviews/?rate=5#wp-bbp_topic_content-wrap";
+        $this->review_url = "https://wordpress.org/support/plugin/{$this->slug}/reviews/#wp-bbp_topic_content-wrap";
         $this->review_after = 6;
         $this->buy_url = $buy_url;
         $this->price = $price;
@@ -105,6 +105,10 @@ class pisol_corw_cancel_order_review{
 
         //update_option($this->saved_value, array('preference'=> 'later', 'update_at'=>'2021/06/10'));
         //delete_option($this->saved_value);
+        add_filter('allowed_redirect_hosts', function($hosts){
+            $hosts[] = 'wordpress.org';
+            return $hosts;
+        });
         
         add_action( 'admin_notices', array($this, 'display_admin_notice'),20 );
         add_action( "admin_post_pi_save_review_preference_{$this->slug}", array($this, 'savePreference'),20 );
@@ -176,8 +180,8 @@ class pisol_corw_cancel_order_review{
     }
 
     function savePreference(){
-            $nonce = isset($_GET['_wpnonce']) ? $_GET['_wpnonce'] : '' ;
-            $preference = isset($_GET['preference']) ? $_GET['preference'] : 'later';
+            $nonce = isset($_GET['_wpnonce']) ? sanitize_text_field(wp_unslash($_GET['_wpnonce'])) : '' ;
+            $preference = isset($_GET['preference']) ? sanitize_text_field(wp_unslash($_GET['preference'])) : 'later';
 
             if(!isset($_GET['_wpnonce']) || !wp_verify_nonce($nonce,"pi_save_review_preference_{$this->slug}")){
                 wp_die(esc_html('Link has expired'), '', array('response' => 403));
@@ -201,7 +205,8 @@ class pisol_corw_cancel_order_review{
                     break;
             }
             update_option($this->saved_value, $values);
-            wp_redirect($redirect);
+            wp_safe_redirect($redirect);
+            exit;
     }
 
     function getInstallationDate(){
