@@ -108,7 +108,7 @@ class pisol_corw_menu{
                         <li><span style="color:white;">&#10003;</span> Redirect to cart/checkout on repeat</li>
                         <li><span style="color:white;">&#10003;</span> Auto refund to Wallet (TerraWallet)</li>
                     </ul>
-                    <h4 class="pi-bottom-banner">💰 <?php echo esc_html(PISOL_CORW_PRICE); ?> <small>Billed yearly</small></h4>
+                    <h4 class="pi-bottom-banner"><?php echo esc_html(PISOL_CORW_PRICE); ?> <small>only</small></h4>
                     <div class="text-center pb-3 pt-2">
                         <a class="btn btn-primary btn-md" href="<?php echo esc_url(PISOL_CORW_BUY_URL); ?>&utm_ref=bottom_link" target="_blank">🔓 Unlock Pro Now – Limited Time Price!</a>
                     </div>

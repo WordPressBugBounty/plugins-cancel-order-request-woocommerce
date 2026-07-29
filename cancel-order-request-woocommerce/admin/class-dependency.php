@@ -17,9 +17,14 @@ class pisol_corw_dependency_manager {
         ?>
         <script type="text/javascript">
             document.addEventListener('DOMContentLoaded', function() {
-                document.getElementById('pisol-corw-install-dependency-plugin').addEventListener('click', function() {
+                var button = document.getElementById('pisol-corw-install-dependency-plugin');
+
+                if (!button) {
+                    return;
+                }
+
+                button.addEventListener('click', function() {
                     
-                    var button = this;
                     button.disabled = true;
                     button.innerText = 'Installing...';
 

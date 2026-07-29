@@ -14,23 +14,18 @@ class pisol_corw_reorder_front{
         add_filter( 'woocommerce_my_account_my_orders_actions', array($this, 'reorderButton'),9999,2);
 
         add_action('wp_ajax_pi_reorder', array($this, 'reorderRequest'));
-
         add_action('wp_ajax_nopriv_pi_reorder', array($this, 'reorderRequest'));
 
         add_action('wp_ajax_pi_reorder_replace', array($this, 'reorderReplace'));
-
-        add_action('wp_ajax_nopriv_pi_reorder_replace', array($this, 'reorderReplace'));
-
         add_action('wp_ajax_pi_reorder_merge', array($this, 'reorderMerge'));
-
-        add_action('wp_ajax_nopriv_pi_reorder_merge', array($this, 'reorderMerge'));
     }
 
     function repeatOrderOnViewOrderPage($order){
         $show_on_view_order_page = get_option('pi_corw_show_reorder_on_view_order_page',1);
         if(self::allowReorder($order) && !empty($show_on_view_order_page)){
             $order_id = version_compare( WC_VERSION, '3.0.0', '<' ) ? $order->id : $order->get_id();
-            $url = admin_url("admin-ajax.php?action=pi_reorder&order_id={$order_id}");
+            $nonce = wp_create_nonce('pi_reorder_'.$order_id);
+            $url = admin_url("admin-ajax.php?action=pi_reorder&order_id={$order_id}&nonce={$nonce}");
             $label = esc_html(get_option('pi_corw_reorder_button_text',__( 'Repeat Order', 'cancel-order-request-woocommerce' )));
 
             printf('<a href="%s" class="woocommerce-button button pi_reorder">%s</a>', esc_url($url), esc_html($label));
@@ -41,9 +36,9 @@ class pisol_corw_reorder_front{
         
         if(self::allowReorder($order)){
             $order_id = version_compare( WC_VERSION, '3.0.0', '<' ) ? $order->id : $order->get_id();
-
+            $nonce = wp_create_nonce('pi_reorder_'.$order_id);
             $actions['pi_reorder'] = array(
-                    'url'  => admin_url("admin-ajax.php?action=pi_reorder&order_id={$order_id}"),
+                    'url'  => admin_url("admin-ajax.php?action=pi_reorder&order_id={$order_id}&nonce={$nonce}"),
                     'name' => esc_html(get_option('pi_corw_reorder_button_text',__( 'Repeat Order', 'cancel-order-request-woocommerce' )))
             );
         }
@@ -65,8 +60,13 @@ class pisol_corw_reorder_front{
 
     function reorderRequest(){
         $order_id = filter_input(INPUT_GET, 'order_id');
+        $nonce = filter_input(INPUT_GET, 'nonce');
         if(empty($order_id)){
             wp_send_json(self::message(__('Error','cancel-order-request-woocommerce'),__('No Order id provided', 'cancel-order-request-woocommerce'), 'error'));
+        }
+
+        if(!wp_verify_nonce($nonce, 'pi_reorder_'.$order_id)){
+            wp_send_json(self::message(__('Error','cancel-order-request-woocommerce'),__('Invalid request', 'cancel-order-request-woocommerce'), 'error'));
         }
 
         $order = wc_get_order($order_id);
@@ -86,8 +86,13 @@ class pisol_corw_reorder_front{
 
     function reorderReplace(){
         $order_id = filter_input(INPUT_GET, 'order_id');
+        $nonce = filter_input(INPUT_GET, 'nonce');
         if(empty($order_id)){
             wp_send_json(self::message(__('Error','cancel-order-request-woocommerce'),__('No Order id provided', 'cancel-order-request-woocommerce'), 'error'));
+        }
+
+        if(!wp_verify_nonce($nonce, 'pi_reorder_replace_'.$order_id)){
+            wp_send_json(self::message(__('Error','cancel-order-request-woocommerce'),__('Invalid request', 'cancel-order-request-woocommerce'), 'error'));
         }
 
         $order = wc_get_order($order_id);
@@ -104,8 +109,14 @@ class pisol_corw_reorder_front{
 
     function reorderMerge(){
         $order_id = filter_input(INPUT_GET, 'order_id');
+        $nonce = filter_input(INPUT_GET, 'nonce');
+
         if(empty($order_id)){
             wp_send_json(self::message(__('Error','cancel-order-request-woocommerce'),__('No Order id provided', 'cancel-order-request-woocommerce'), 'error'));
+        }
+
+        if(!wp_verify_nonce($nonce, 'pi_reorder_merge_'.$order_id)){
+            wp_send_json(self::message(__('Error','cancel-order-request-woocommerce'),__('Invalid request', 'cancel-order-request-woocommerce'), 'error'));
         }
 
         $order = wc_get_order($order_id);
@@ -149,12 +160,14 @@ class pisol_corw_reorder_front{
     static function showOptions($order_id){
         $replace_cart_url = add_query_arg(array(
             'order_id'=> $order_id,
-            'action'=> 'pi_reorder_replace'
+            'action'=> 'pi_reorder_replace',
+            'nonce'=> wp_create_nonce('pi_reorder_replace_'.$order_id)
         ), admin_url('admin-ajax.php'));
 
         $merge_cart_url = add_query_arg(array(
             'order_id'=> $order_id,
-            'action'=> 'pi_reorder_merge'
+            'action'=> 'pi_reorder_merge',
+            'nonce'=> wp_create_nonce('pi_reorder_merge_'.$order_id)
         ), admin_url('admin-ajax.php'));
 
         wp_send_json(array(
