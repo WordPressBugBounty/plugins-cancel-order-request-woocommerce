@@ -36,6 +36,7 @@ class pisol_corw_menu{
 
     public function bootstrap_style() {
         wp_enqueue_script( $this->plugin_name."_quick_save", plugin_dir_url( __FILE__ ) . 'js/pisol-quick-save.js', array('jquery'), $this->version, 'all' );
+        wp_enqueue_style( $this->plugin_name."_promotion", plugin_dir_url( __FILE__ ) . 'css/promotion.css', array(), $this->version, 'all' );
     }
 
 
@@ -86,34 +87,44 @@ class pisol_corw_menu{
 
     function promotion(){
         ?>
-        <div class="col-12 col-sm-4 pt-3 border-left">
+        <div class="col-12 col-sm-4 col-xl-3 col-lg-4 pt-3 border-left">
+
+        <div class="pisol-cor-banner">
+
+            <div class="pisol-cor-stars" aria-label="5 star rating">
+                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+            </div>
+
+            <p class="pisol-cor-trust">
+                <span class="pisol-cor-emoji">🚀</span> Trusted by <strong>3,000+</strong> WooCommerce Stores
+            </p>
+            <p class="pisol-cor-rating">Rated <strong>4.9/5</strong> — Users love it</p>
+
+            <ul class="pisol-cor-features">
+                <li><span class="pisol-cor-check">✓</span> Partial order cancellation</li>
+                <li><span class="pisol-cor-check">✓</span> Disable cancel for specific product</li>
+                <li><span class="pisol-cor-check">✓</span> Upload image with cancel request</li>
+                <li><span class="pisol-cor-check">✓</span> Withdraw cancellation request</li>
+                <li><span class="pisol-cor-check">✓</span> Disable cancel by payment method</li>
+                <li><span class="pisol-cor-check">✓</span> Disable cancel by customer group</li>
+                <li><span class="pisol-cor-check">✓</span> Set default action on repeat order</li>
+                <li><span class="pisol-cor-check">✓</span> Redirect to cart/checkout on repeat</li>
+                <li><span class="pisol-cor-check">✓</span> Auto refund to Wallet (TerraWallet)</li>
+            </ul>
+
+            <div class="pisol-cor-price">
+                <span class="pisol-cor-price-amount"><?php echo esc_html(PISOL_CORW_PRICE); ?> </span>
+                <span class="pisol-cor-price-label">only</span>
+            </div>
+
+            <a href="<?php echo esc_url(PISOL_CORW_BUY_URL); ?>" target="_blank" class="pisol-cor-cta">
+                <span class="pisol-cor-lock">🔓</span> Unlock Pro Now — Limited Time Price!
+            </a>
+
+        </div>
 
             
-            <div class="pi-shadow rounded px-2 py-3 mb-3 pi-sticky">
-                
-                    <h2 id="pi-banner-tagline" class="mb-0" style="color:#ccc !important;">
-                        <span class="d-block mb-4">⭐️⭐️⭐️⭐️⭐️</span>
-                        <span class="d-block mb-2">🚀 Trusted by <span style="color:#fff;">3,000+</span> WooCommerce Stores</span>
-                        <span class="d-block mb-2">Rated <span style="color:#fff;">4.9/5</span> – Users love it</span>
-                    </h2>
-                <div class="inside">
-                    <ul class="pisol-pro-feature-list">
-                        <li><span style="color:white;">&#10003;</span> Partial order cancellation</li>
-                        <li><span style="color:white;">&#10003;</span> Disable cancel for specific product</li>
-                        <li><span style="color:white;">&#10003;</span> Upload image with cancel request</li>
-                        <li><span style="color:white;">&#10003;</span> Withdraw cancellation request</li>
-                        <li><span style="color:white;">&#10003;</span> Disable cancel by payment method</li>
-                        <li><span style="color:white;">&#10003;</span> Disable cancel by customer group</li>
-                        <li><span style="color:white;">&#10003;</span> Set default action on repeat order</li>
-                        <li><span style="color:white;">&#10003;</span> Redirect to cart/checkout on repeat</li>
-                        <li><span style="color:white;">&#10003;</span> Auto refund to Wallet (TerraWallet)</li>
-                    </ul>
-                    <h4 class="pi-bottom-banner"><?php echo esc_html(PISOL_CORW_PRICE); ?> <small>only</small></h4>
-                    <div class="text-center pb-3 pt-2">
-                        <a class="btn btn-primary btn-md" href="<?php echo esc_url(PISOL_CORW_BUY_URL); ?>&utm_ref=bottom_link" target="_blank">🔓 Unlock Pro Now – Limited Time Price!</a>
-                    </div>
-                </div>
-            </div>
+            
         </div>
         
         <?php

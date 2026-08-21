@@ -3,7 +3,7 @@ Contributors: rajeshsingh520
 Tags: order again, re-order, cancel order, woocommerce cancel order, refund
 Requires at least: 3.0.1
 Tested up to: 7.0
-Stable tag: 1.3.4.34
+Stable tag: 1.3.4.36
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -191,6 +191,10 @@ Yes. Both the Free and PRO versions are HPOS compatible.
 19. Auto refund in the customer wallet
 
 == Changelog ==
+
+= 1.3.4.36 =
+* Tested for WC 11.0.0
+* Banner change
 
 = 1.3.4.34 =
 * nonce added in the reorder request

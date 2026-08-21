@@ -17,7 +17,10 @@ class pisol_corw_reorder_front{
         add_action('wp_ajax_nopriv_pi_reorder', array($this, 'reorderRequest'));
 
         add_action('wp_ajax_pi_reorder_replace', array($this, 'reorderReplace'));
+        add_action('wp_ajax_nopriv_pi_reorder_replace', array($this, 'reorderReplace'));
+
         add_action('wp_ajax_pi_reorder_merge', array($this, 'reorderMerge'));
+        add_action('wp_ajax_nopriv_pi_reorder_merge', array($this, 'reorderMerge'));
     }
 
     function repeatOrderOnViewOrderPage($order){

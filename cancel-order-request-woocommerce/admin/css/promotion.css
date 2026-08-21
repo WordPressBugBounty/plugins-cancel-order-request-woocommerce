@@ -1,0 +1,161 @@
+/* ==========================================================
+   PI Cancel Order Request — Pro Upsell Side Banner
+   Scoped under .pisol-cor-banner, all rules use !important
+   so this survives other admin/theme CSS on the page.
+   ========================================================== */
+
+.pisol-cor-banner,
+.pisol-cor-banner * {
+  box-sizing: border-box !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  text-shadow: none !important;
+  list-style: none !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+}
+
+.pisol-cor-banner {
+  width: 100% !important;
+  max-width: 320px !important;
+  background: linear-gradient(160deg, #3a1240 0%, #7b1f3a 55%, #c2451c 100%) !important;
+  border-radius: 22px !important;
+  padding: 28px 22px 24px !important;
+  color: #ffffff !important;
+  box-shadow: 0 18px 40px rgba(60, 10, 30, 0.35), 0 2px 6px rgba(0,0,0,0.15) !important;
+  position: relative !important;
+  overflow: hidden !important;
+  line-height: 1.4 !important;
+  margin:20px auto !important;
+}
+
+/* soft glow accent */
+.pisol-cor-banner::before {
+  content: "" !important;
+  position: absolute !important;
+  top: -60px !important;
+  right: -60px !important;
+  width: 180px !important;
+  height: 180px !important;
+  background: radial-gradient(circle, rgba(255,158,71,0.35) 0%, rgba(255,158,71,0) 70%) !important;
+  border-radius: 50% !important;
+  pointer-events: none !important;
+}
+
+.pisol-cor-stars {
+  text-align: center !important;
+  font-size: 20px !important;
+  letter-spacing: 3px !important;
+  color: #ffb020 !important;
+  margin-bottom: 14px !important;
+  position: relative !important;
+}
+
+.pisol-cor-trust {
+  text-align: center !important;
+  font-size: 14.5px !important;
+  color: #ffe9d6 !important;
+  margin-bottom: 4px !important;
+  position: relative !important;
+}
+
+.pisol-cor-trust strong {
+  color: #ffffff !important;
+  font-weight: 700 !important;
+}
+
+.pisol-cor-emoji {
+  margin-right: 4px !important;
+}
+
+.pisol-cor-rating {
+  text-align: center !important;
+  font-size: 13px !important;
+  color: rgba(255,255,255,0.7) !important;
+  margin-bottom: 20px !important;
+  position: relative !important;
+}
+
+.pisol-cor-rating strong {
+  color: #ffffff !important;
+  font-weight: 700 !important;
+}
+
+.pisol-cor-features {
+  display: block !important;
+  margin-bottom: 22px !important;
+  position: relative !important;
+}
+
+.pisol-cor-features li {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  font-size: 13.5px !important;
+  color: #fdf3ec !important;
+  padding: 8px 10px !important;
+  border-radius: 10px !important;
+  margin-bottom: 4px !important;
+  background: rgba(255,255,255,0.06) !important;
+}
+
+.pisol-cor-check {
+  flex: 0 0 auto !important;
+  width: 18px !important;
+  height: 18px !important;
+  border-radius: 50% !important;
+  background: linear-gradient(135deg, #ff9e47, #ff5f5f) !important;
+  color: #ffffff !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  line-height: 1 !important;
+}
+
+.pisol-cor-price {
+  text-align: center !important;
+  margin-bottom: 16px !important;
+  position: relative !important;
+}
+
+.pisol-cor-price-amount {
+  font-size: 30px !important;
+  font-weight: 800 !important;
+  color: #ffffff !important;
+}
+
+.pisol-cor-price-label {
+  font-size: 14px !important;
+  color: rgba(255,255,255,0.65) !important;
+  margin-left: 6px !important;
+}
+
+.pisol-cor-cta {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  width: 100% !important;
+  text-align: center !important;
+  background: linear-gradient(135deg, #ff7a1a, #ff3d54) !important;
+  color: #ffffff !important;
+  font-size: 14.5px !important;
+  font-weight: 700 !important;
+  padding: 13px 14px !important;
+  border-radius: 12px !important;
+  text-decoration: none !important;
+  box-shadow: 0 10px 22px rgba(255, 61, 84, 0.45) !important;
+  transition: transform 0.15s ease, box-shadow 0.15s ease !important;
+  position: relative !important;
+}
+
+.pisol-cor-cta:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 14px 28px rgba(255, 61, 84, 0.55) !important;
+  color: #ffffff !important;
+}
+
+.pisol-cor-lock {
+  font-size: 14px !important;
+}
