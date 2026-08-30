@@ -3,55 +3,130 @@
     margin:auto;
     max-width:90%;
     background:#fff;
-    padding:15px;
+    padding:30px;
     position: relative;
-    border:1px solid #ccc;
+    border:none;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    border-radius:12px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+.pi-corw-container h4{
+    color:#1a1a1a;
+    font-size:22px;
+    font-weight:600;
+    margin-bottom:24px;
+    margin-top:0;
+    letter-spacing:-0.3px;
 }
 
 .pi-corw-container .mb-10{
-    margin-bottom:10px;
+    margin-bottom:16px;
 }
 
 .pi-corw-container .mt-5{
-    margin-top:5px;
+    margin-top:8px;
 }
 
 .pi-corw-container textarea{
     width:100%;
-    padding:10px;
+    padding:12px 16px;
+    box-sizing:border-box;
+    border:1.5px solid #e0e0e0;
+    border-radius:8px;
+    font-size:14px;
+    font-family:inherit;
+    resize:vertical;
+    min-height:120px;
+    transition:border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pi-corw-container textarea:focus{
+    outline:none;
+    border-color:#0066cc;
+    box-shadow:0 0 0 3px rgba(0,102,204,0.1);
+}
+
+.pi-corw-container textarea::placeholder{
+    color:#999;
 }
 
 .pi-alert-box{
-    background:#F00;
-    color:#fff;
-    padding:7px 10px;
-    border-radius:4px;
-    margin-bottom:10px;
+    background:#fff3cd;
+    color:#664d03;
+    padding:12px 16px;
+    border-radius:8px;
+    margin-bottom:20px;
+    border:1px solid #ffe69c;
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.pi-alert-box::before{
+    content:'⚠';
+    font-size:18px;
+    flex-shrink:0;
 }
 
 .pi-cord-reason-label{
-    display:block;
+    display:flex;
+    align-items:center;
     width:100%;
-    margin-bottom:10px;
+    margin-bottom:12px;
+    padding:12px 14px;
+    border:1.5px solid #e8e8e8;
+    border-radius:8px;
+    cursor:pointer;
+    transition:all 0.3s ease;
+    background:#f9f9f9;
+    box-sizing:border-box;
+}
+
+.pi-cord-reason-label:hover{
+    border-color:#0066cc;
+    background:#f0f7ff;
+}
+
+.pi-cord-reason-label input[type="radio"]{
+    cursor:pointer;
+    margin-right:12px;
+    width:18px;
+    height:18px;
+    accent-color:#0066cc;
 }
 
 .pi-cord-reason{
-    margin-left:5px;
+    margin-left:0;
+    color:#333;
+    font-size:14px;
+    flex:1;
 }
 
 .pi-options-button{
     display:flex;
-    padding:5px;
+    padding:0;
     flex-direction: column;
+    gap:10px;
 }
 
 .pi-options-button .pi-button{
-    padding:10px;
-    background:#ccc;
-    color:#000;
-    margin:5px;
-    border-radius: 4px;
+    padding:12px 20px;
+    background:#f0f0f0;
+    color:#333;
+    margin:0;
+    border-radius:8px;
     text-align: center;
+    border:1.5px solid #e0e0e0;
+    cursor:pointer;
+    font-size:14px;
+    font-weight:500;
+    transition:all 0.3s ease;
+}
+
+.pi-options-button .pi-button:hover{
+    background:#e8e8e8;
+    border-color:#999;
 }
 
 .pi-failed-product-list a{
@@ -65,23 +140,81 @@
 
 .pi-navigation-link{
     display: flex;
+    gap:8px;
+    margin-top:20px !important;
 }
 
 .pi-navigation-link a{
-    padding:7px;
-    border-radius:4px;
-    background:#ccc;
-    margin: 3px;
+    padding:10px 16px;
+    border-radius:8px;
+    background:#f0f0f0;
+    margin: 0;
     flex: 1;
     text-align: center;
-    color: #000 !important;
+    color: #333 !important;
+    border:1.5px solid #e0e0e0;
+    text-decoration:none;
+    font-size:14px;
+    font-weight:500;
+    cursor:pointer;
+    transition:all 0.3s ease;
 }
 
+.pi-navigation-link a:hover{
+    background:#e8e8e8;
+    border-color:#999;
+}
+
+.pi-navigation-link a.pi-button-primary,
+.pi-corw-container input[type="submit"]{
+    background:#0066cc;
+    color:#fff !important;
+    border-color:#0066cc;
+    font-weight:600;
+}
+
+.pi-navigation-link a.pi-button-primary:hover,
+.pi-corw-container input[type="submit"]:hover{
+    background:#0052a3;
+    border-color:#0052a3;
+    box-shadow:0 4px 12px rgba(0,102,204,0.3);
+}
+
+.pi-corw-container input[type="submit"]{
+    padding:12px 24px;
+    margin:20px 0 0 0;
+    border:none;
+    border-radius:8px;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+    width:100%;
+    transition:all 0.3s ease;
+}
 
 .pi-wallet-refund{
-    display:block;
-    padding:10px;
-    background:#ccc;
-    margin-bottom:15px;
-    border-radius:10px;
+    display:flex;
+    align-items:center;
+    padding:14px 16px;
+    background:#f0f8ff;
+    margin-bottom:20px;
+    border-radius:8px;
+    border:1.5px solid #d4e8f5;
+    gap:10px;
+}
+
+.pi-wallet-refund input[type="checkbox"]{
+    cursor:pointer;
+    margin:0;
+    width:18px;
+    height:18px;
+    accent-color:#0066cc;
+}
+
+.pi-wallet-refund label{
+    cursor:pointer;
+    margin:0;
+    color:#333;
+    font-size:14px;
+    flex:1;
 }

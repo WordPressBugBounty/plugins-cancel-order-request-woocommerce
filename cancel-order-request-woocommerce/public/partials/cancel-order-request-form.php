@@ -1,4 +1,17 @@
 <?php if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
+<?php
+/**
+ * Cancel Order Request Form
+ *
+ * @package Cancel_Order_Request_WooCommerce
+ * @since 1.0.0
+ * @var int $order_id
+ * @var string $order_no
+ * @var string $order_key
+ * @var string $redirect_url
+ * @var string $predefined_reasons
+ */
+?>
 
 <div class="pi-corw-container">
 <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="post">
