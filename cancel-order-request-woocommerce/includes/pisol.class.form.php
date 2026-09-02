@@ -1,6 +1,6 @@
 <?php
 /**
-* version 4.0
+* version 4.1
 * code optimized now we can make new desing for each plugin
 */
 defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
@@ -68,6 +68,7 @@ class pisol_class_form_corw{
             'switch_category' => 'switch_category_display',
             'setting_category'=> 'setting_category',
             'image'           => 'image',
+            'group'           => 'field_group',
         );
 
         $method = isset( $method_map[ $this->setting['type'] ] ) ? $method_map[ $this->setting['type'] ] : null;
@@ -77,16 +78,88 @@ class pisol_class_form_corw{
         } else {
             $this->custom_field();
         }
+    }   
+
+    /**
+     * 
+     * array(
+            'field' => 'shipping_group_1',   // still required, even though it's not a real option — used for id/hooks
+            'type'  => 'group',
+            'label' => 'Shipping Options',
+            'desc'  => 'Configure how rates are calculated.',
+            'fields' => array(
+                array('field' => 'shipping_flat_rate', 'type' => 'number', 'label' => 'Flat rate', ...),
+                array('field' => 'shipping_free_over', 'type' => 'number', 'label' => 'Free over', ...),
+            ),
+        ),
+     */
+    function field_group(){
+        $prefix = $this->get_hook_prefix();
+
+        $collapsible = !empty($this->setting['collapsible']);
+        $is_open     = !isset($this->setting['open']) || $this->setting['open']; // defaults to open
+
+        $group_desc = isset($this->setting['desc'])
+            ? '<p class="text-muted">'.wp_kses($this->setting['desc'], $this->allowed_tags).'</p>'
+            : '';
+
+        $group_links = $this->get_link_html();
+        // Prevent link clicks from toggling <details> when inside <summary>
+        if(!empty($group_links) && !empty($collapsible)){
+            $group_links = str_replace('<a ', '<a onclick="event.stopPropagation();" ', $group_links);
+        }
+        $group_links_html = !empty($group_links) ? '<div class="pisol-group-link-container mt-2">'.$group_links.'</div>' : '';
+
+        if($collapsible){
+            $group_label = isset($this->setting['label'])
+                ? wp_kses_post($this->setting['label'])
+                : '';
+
+            $group_open = '<details id="group_'.esc_attr($this->setting['field']).'" class="pisol-field-group-container border rounded p-3 mb-4 '.esc_attr($this->setting['class'] ?? '').'"'.($is_open ? ' open' : '').'>'
+                . '<summary class="h6 mb-0 pisol-field-group-summary" style="cursor:pointer;">'.$group_label
+                .$group_desc.$group_links_html.'</summary>'
+                . '<div class="pt-3 pisol-field-group-content">';
+
+            $group_close = '</div></details>';
+        }else{
+            $group_label = isset($this->setting['label'])
+                ? '<h3 class="pisol-field-group-title h5 mb-3 '.esc_attr($this->setting['class_title'] ?? '').'">'.wp_kses_post($this->setting['label']).'</h3>'
+                : '';
+
+            $group_open = '<div id="group_'.esc_attr($this->setting['field']).'" class="pisol-field-group-container border rounded p-3 mb-4 '.esc_attr($this->setting['class'] ?? '').'">'
+                . $group_label
+                . $group_desc
+                . $group_links_html;
+
+            $group_close = '</div>';
+        }
+
+        $group_open = apply_filters("{$prefix}_formmaker_group_html_open", $group_open, $this->setting, $this);
+        $group_open = apply_filters("{$prefix}_formmaker_group_html_open_field_{$this->setting['field']}", $group_open, $this->setting, $this);
+
+        $group_close = apply_filters("{$prefix}_formmaker_group_html_close", $group_close, $this->setting, $this);
+        $group_close = apply_filters("{$prefix}_formmaker_group_html_close_field_{$this->setting['field']}", $group_close, $this->setting, $this);
+
+        $fields_html = '';
+        if(!empty($this->setting['fields']) && is_array($this->setting['fields'])){
+            ob_start();
+            foreach($this->setting['fields'] as $sub_setting){
+                new self($sub_setting);
+            }
+            $fields_html = ob_get_clean();
+        }
+
+        echo $group_open . $fields_html . $group_close;
     }
 
     function get_label_html(){
-        if($this->setting['type'] == 'setting_category') return '<h2 class="mt-0 mb-0 '.esc_attr($this->setting['class_title'] ?? '').'">'.wp_kses_post($this->setting['label']).'</h2>';
+        if($this->setting['type'] == 'setting_category') return '<h2 class="pisol-field-title mt-0 mb-0 '.esc_attr($this->setting['class_title'] ?? '').'">'.wp_kses_post($this->setting['label']).'</h2>';
 
-        return '<label class="h6 mb-0" for="'.esc_attr($this->setting['field']).'">'.wp_kses_post($this->setting['label']).'</label>';
+        return '<label class="pisol-field-label h6 mb-0" for="'.esc_attr($this->setting['field']).'">'.wp_kses_post($this->setting['label']).'</label>';
     }
 
     function get_desc_html(){
-        return (isset($this->setting['desc'])) ? '<br><small>'.wp_kses($this->setting['desc'], $this->allowed_tags).'</small>' : "";
+        return (isset($this->setting['desc'])) && !empty($this->setting['desc']) ? '<div class="pisol-field-description"><small>'.wp_kses($this->setting['desc'], $this->allowed_tags).'</small></div>' : "";
     }
 
     function get_link_html(){
@@ -100,10 +173,10 @@ class pisol_class_form_corw{
         $html = '';
         $links = $this->setting['links'];
         foreach($links as $link){
-            $class = 'pi-'.$link['type'];
+            $class = 'pi-'.($link['type'] ?? 'link');
             $html .= '<a href="'.esc_url($link['url']).'" class="'.esc_attr($class).' pi-info-links" target="_blank">'.esc_html($link['name']).'</a> ';
         }
-        return $html;
+        return !empty($html) ? '<div class="pisol-info-links">'.$html.'</div>' : '';
     }
 
     function get_title_col_width(){
@@ -148,15 +221,15 @@ class pisol_class_form_corw{
         ob_start();
         if($this->setting['type'] != 'hidden'){
         ?>
-        <div id="row_<?php echo esc_attr($this->setting['field']); ?>"  class="pisol-form-element-row row py-4 border-bottom align-items-center <?php echo esc_attr($this->pro); ?> <?php echo !empty($this->setting['class']) ? esc_attr($this->setting['class']) : ''; ?>">
-            <div class="col-12 col-md-<?php echo esc_attr($title_col); ?>">
+        <div id="row_<?php echo esc_attr($this->setting['field']); ?>"  class="pisol-form-element-row row py-4 border-bottom align-items-center <?php echo esc_attr($this->pro); ?> <?php echo !empty($this->setting['class']) ? esc_attr($this->setting['class']) : ''; ?> field-type-<?php echo esc_attr($this->setting['type']); ?>">
+            <div class="pisol-form-label-col col-md-<?php echo esc_attr($title_col); ?>">
                 <?php echo wp_kses($label_html, $this->allowed_tags); ?>
-                <?php echo wp_kses($desc_html != "" ? $desc_html.'<br>': "", $this->allowed_tags); ?>
-                <?php echo wp_kses($links_html != "" ? $links_html: "", $this->allowed_tags); ?>
+                <?php echo wp_kses($desc_html != "" ? $desc_html : "", $this->allowed_tags); ?>
+                <?php echo wp_kses($links_html != "" ? $links_html : "", $this->allowed_tags); ?>
                 <?php do_action("{$prefix}_after_label_of_{$this->setting['field']}", $this->setting['field'],$this->setting); ?>
             </div>
             <?php if($this->setting['type'] != 'setting_category'): ?>
-            <div class="col-12 col-md-<?php echo esc_attr($setting_col); ?>">
+            <div class="pisol-form-setting-col col-12 col-md-<?php echo esc_attr($setting_col); ?>">
                 <?php echo wp_kses($field_html, $this->allowed_tags, ['https', 'http']); ?>
             </div>
             <?php endif; ?>
@@ -164,8 +237,8 @@ class pisol_class_form_corw{
         <?php
         }else{
             ?>
-            <div id="row_<?php echo esc_attr($this->setting['field']); ?>" class="pisol-form-element-row row align-items-center <?php echo esc_attr($this->pro); ?>">
-                <div class="col-12 col-md-12">
+            <div id="row_<?php echo esc_attr($this->setting['field']); ?>" class="pisol-form-element-row row align-items-center <?php echo esc_attr($this->pro); ?> field-type-<?php echo esc_attr($this->setting['type']); ?>">
+                <div class="pisol-form-setting-col col-12 col-md-12">
                     <?php echo wp_kses($field_html, $this->allowed_tags, ['https', 'http']); ?>
                 </div>
             </div>
@@ -191,7 +264,7 @@ class pisol_class_form_corw{
     */
     function select_box(){
 
-        $field = '<select class="form-control '.esc_attr($this->pro).'" name="'.esc_attr($this->setting['field']).'" id="'.esc_attr($this->setting['field']).'"'
+        $field = '<select class="pisol-field-'.esc_attr($this->setting['type']).' form-control '.esc_attr($this->pro).'" name="'.esc_attr($this->setting['field']).'" id="'.esc_attr($this->setting['field']).'"'
          .(isset($this->setting['multiple']) ? ' multiple="'.esc_attr($this->setting['multiple']).'"': '')
         .'>';
             foreach($this->setting['value'] as $key => $val){
@@ -203,12 +276,12 @@ class pisol_class_form_corw{
     }
 
     function radio_group(){
-        $field = '<div class="'.esc_attr($this->setting['radio_class'] ?? '').'">';
+        $field = '<div class="pisol-field-radio-group-container '.esc_attr($this->setting['radio_class'] ?? '').'">';
         foreach($this->setting['value'] as $key => $val){
             $is_last = ($key === array_key_last($this->setting['value']));
             $mb_class = $is_last ? '' : ' mb-3';
-            $field .= '<div class="form-check ' . $mb_class . '">
-                <input class="form-check-input" type="radio" name="'.esc_attr($this->setting['field']).'" id="'.esc_attr($this->setting['field'].'_'.$key).'" value="'.esc_attr($key).'" '.checked($this->saved_value, $key, false).'>
+            $field .= '<div class="pisol-field-radio-container form-check ' . $mb_class . '">
+                <input class="pisol-field-radio form-check-input" type="radio" name="'.esc_attr($this->setting['field']).'" id="'.esc_attr($this->setting['field'].'_'.$key).'" value="'.esc_attr($key).'" '.checked($this->saved_value, $key, false).'>
                 <label class="form-check-label font-italic" for="'.esc_attr($this->setting['field'].'_'.$key).'">'.esc_html($val).'</label>
             </div>';
         }
@@ -222,7 +295,7 @@ class pisol_class_form_corw{
         Field type: select box
     */
     function multiselect_box(){
-        $field = '<select style="min-height:100px;" class="form-control multiselect '.esc_attr($this->pro).'" name="'.esc_attr($this->setting['field']).'[]" id="'.esc_attr($this->setting['field']).'" multiple'. '>';
+        $field = '<select style="min-height:100px;" class="pisol-field-multiselect form-control multiselect '.esc_attr($this->pro).'" name="'.esc_attr($this->setting['field']).'[]" id="'.esc_attr($this->setting['field']).'" multiple'. '>';
             foreach($this->setting['value'] as $key => $val){
                 if(isset($this->saved_value) && $this->saved_value != false){
                     $field .='<option value="'.esc_attr($key).'" '.( ( in_array($key, $this->saved_value) ) ? " selected=\"selected\" " : "" ).'>'.esc_html($val).'</option>';
@@ -239,7 +312,7 @@ class pisol_class_form_corw{
         Field type: Number box
     */
     function number_box(){
-        $field = '<input type="number" class="form-control '.esc_attr($this->pro).'" name="'.esc_attr($this->setting['field']).'" id="'.esc_attr($this->setting['field']).'" value="'.esc_attr($this->saved_value).'"'
+        $field = '<input type="number" class="pisol-field-number form-control '.esc_attr($this->pro).'" name="'.esc_attr($this->setting['field']).'" id="'.esc_attr($this->setting['field']).'" value="'.esc_attr($this->saved_value).'"'
         .(isset($this->setting['min']) ? ' min="'.esc_attr($this->setting['min']).'"': '')
         .(isset($this->setting['max']) ? ' max="'.esc_attr($this->setting['max']).'"': '')
         .(isset($this->setting['step']) ? ' step="'.esc_attr($this->setting['step']).'"': '')
@@ -254,7 +327,7 @@ class pisol_class_form_corw{
         Field type: Number box
     */
     function text_box(){
-        $field = '<input type="text" class="form-control '.esc_attr($this->pro).'" name="'.esc_attr($this->setting['field']).'" id="'.esc_attr($this->setting['field']).'" value="'.esc_attr($this->saved_value).'"'
+        $field = '<input type="text" class="pisol-field-text form-control '.esc_attr($this->pro).'" name="'.esc_attr($this->setting['field']).'" id="'.esc_attr($this->setting['field']).'" value="'.esc_attr($this->saved_value).'"'
         .(isset($this->setting['required']) ? ' required="'.esc_attr($this->setting['required']).'"': '')
         .(isset($this->setting['readonly']) ? ' readonly="'.esc_attr($this->setting['readonly']).'"': '')
         .'>';
@@ -266,7 +339,7 @@ class pisol_class_form_corw{
     Textarea field
     */
     function textarea_box(){
-        $field = '<textarea style="height:auto !important; min-height:200px;" type="text" class="form-control '.esc_attr($this->pro).'" name="'.esc_attr($this->setting['field']).'" id="'.esc_attr($this->setting['field']).'"'
+        $field = '<textarea style="height:auto !important; min-height:200px;" type="text" class="pisol-field-textarea form-control '.esc_attr($this->pro).'" name="'.esc_attr($this->setting['field']).'" id="'.esc_attr($this->setting['field']).'"'
         .(isset($this->setting['required']) ? ' required="'.esc_attr($this->setting['required']).'"': '')
         .(isset($this->setting['readonly']) ? ' readonly="'.esc_attr($this->setting['readonly']).'"': '')
         .'>';
@@ -280,7 +353,7 @@ class pisol_class_form_corw{
         Field type: color
     */
     function color_box(){
-        $field = '<input type="color" class="color-picker pisol_select '.esc_attr($this->pro).'" name="'.esc_attr($this->setting['field']).'" id="'.esc_attr($this->setting['field']).'" value="'.esc_attr($this->saved_value).'"'
+        $field = '<input type="color" class="color-picker pisol-field-color '.esc_attr($this->pro).'" name="'.esc_attr($this->setting['field']).'" id="'.esc_attr($this->setting['field']).'" value="'.esc_attr($this->saved_value).'"'
         .(isset($this->setting['required']) ? ' required="'.esc_attr($this->setting['required']).'"': '')
         .(isset($this->setting['readonly']) ? ' readonly="'.esc_attr($this->setting['readonly']).'"': '')
         .'>';
@@ -289,7 +362,7 @@ class pisol_class_form_corw{
     }
 
     function hidden_box(){
-        $field ='<input type="hidden" class="pisol_select '.esc_attr($this->pro).'" name="'.esc_attr($this->setting['field']).'" id="'.esc_attr($this->setting['field']).'" value="'.esc_attr($this->saved_value).'"'
+        $field ='<input type="hidden" class="pisol-field-hidden form-control '.esc_attr($this->pro).'" name="'.esc_attr($this->setting['field']).'" id="'.esc_attr($this->setting['field']).'" value="'.esc_attr($this->saved_value).'"'
         .(isset($this->setting['required']) ? ' required="'.esc_attr($this->setting['required']).'"': '')
         .(isset($this->setting['readonly']) ? ' readonly="'.esc_attr($this->setting['readonly']).'"': '')
         .'>';
@@ -302,7 +375,7 @@ class pisol_class_form_corw{
     */
     function switch_display(){
         $field = '<div class="custom-control custom-switch">
-        <input type="checkbox" value="1" class="custom-control-input" name="'.esc_attr($this->setting['field']).'" id="'.esc_attr($this->setting['field']).'" '.(($this->saved_value == true) ? "checked='checked'": "").' >
+        <input type="checkbox" value="1" class="pisol-field-checkbox custom-control-input" name="'.esc_attr($this->setting['field']).'" id="'.esc_attr($this->setting['field']).'" '.(($this->saved_value == true) ? "checked='checked'": "").' >
         <label class="custom-control-label" for="'.esc_attr($this->setting['field']).'"></label>
         </div>';
 
@@ -311,7 +384,7 @@ class pisol_class_form_corw{
 
     function switch_category_display(){
         $field = '<div class="custom-control custom-switch">
-        <input type="checkbox" value="1" class="custom-control-input" name="'.esc_attr($this->setting['field']).'" id="'.esc_attr($this->setting['field']).'" '.(!empty($this->saved_value) ? "checked='checked'": "").' >
+        <input type="checkbox" value="1" class="pisol-field-checkbox custom-control-input" name="'.esc_attr($this->setting['field']).'" id="'.esc_attr($this->setting['field']).'" '.(!empty($this->saved_value) ? "checked='checked'": "").' >
         <label class="custom-control-label" for="'.esc_attr($this->setting['field']).'"></label>
         </div>';
 
@@ -418,6 +491,15 @@ class pisol_class_form_corw{
      * 'sanitize_callback' => 'sanitize_text_field' => directly add the sanitization function name
      */
     static function register_setting($group, $setting){
+
+        if(isset($setting['type']) && $setting['type'] === 'group'){
+            if(!empty($setting['fields']) && is_array($setting['fields'])){
+                foreach($setting['fields'] as $sub_setting){
+                    self::register_setting($group, $sub_setting);
+                }
+            }
+            return;
+        }
         
         $validation_function = self::getValidationFunction($setting);
        

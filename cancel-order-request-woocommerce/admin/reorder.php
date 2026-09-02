@@ -109,7 +109,7 @@ class pisol_corw_reorder_option{
                 new pisol_class_form_corw($setting, $this->setting_key);
             }
         ?>
-        <input type="submit" class="my-3 btn btn-primary btn-md" value="<?php esc_attr_e('Save Option','cancel-order-request-woocommerce'); ?>" />
+        <input type="submit" id="submit" class="my-3 btn btn-primary btn-md" value="<?php esc_attr_e('Save Option','cancel-order-request-woocommerce'); ?>" />
         </form>
        <?php
     }

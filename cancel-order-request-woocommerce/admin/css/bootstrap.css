@@ -26,7 +26,7 @@
 	--warning: #ffc107;
 	--danger: #dc3545;
 	--light: #f8f9fa;
-	--dark: #1a4562;
+	--dark: #1e1e1e;
 	--dark2: rgba(26, 69, 98, 0.75);
 	--breakpoint-xs: 0;
 	--breakpoint-sm: 576px;
@@ -4223,8 +4223,8 @@
 
 .bootstrap-wrapper .custom-control-input:checked~.custom-control-label::before {
 	color: #fff;
-	border-color: #007bff;
-	background-color: #007bff;
+	border-color: var(--primary);
+	background-color: var(--primary);
 }
 
 .bootstrap-wrapper .custom-control-input:focus~.custom-control-label::before {
@@ -7420,7 +7420,7 @@
 }
 
 .bootstrap-wrapper .bg-dark2 {
-	background-color: var(--dark2) !important;
+	background-color: var(--dark) !important;
 }
 
 .bootstrap-wrapper a.bg-dark:hover,

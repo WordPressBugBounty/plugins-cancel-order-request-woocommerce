@@ -36,7 +36,9 @@ class pisol_corw_menu{
 
     public function bootstrap_style() {
         wp_enqueue_script( $this->plugin_name."_quick_save", plugin_dir_url( __FILE__ ) . 'js/pisol-quick-save.js', array('jquery'), $this->version, 'all' );
+        wp_enqueue_style( $this->plugin_name."_bootstrap", plugin_dir_url( __FILE__ ) . 'css/bootstrap.css', array(), $this->version, 'all' );
         wp_enqueue_style( $this->plugin_name."_promotion", plugin_dir_url( __FILE__ ) . 'css/promotion.css', array(), $this->version, 'all' );
+        wp_enqueue_style($this->plugin_name."_side-menu", plugin_dir_url( __FILE__ ) . 'css/side-menu.css', [], $this->version);
     }
 
 
@@ -55,13 +57,8 @@ class pisol_corw_menu{
                                     <a href="https://www.piwebsolution.com/" target="_blank"><img id="pi-logo" class="img-fluid ml-2" src="<?php echo esc_url(plugin_dir_url( __FILE__ )); ?>img/pi-web-solution.svg"></a>
                             </div>
                             <div class="col-12 col-sm-10 d-flex text-center small">
-                                <nav id="pisol-navbar" class="navbar navbar-expand-lg navbar-light mr-0 ml-auto">
-                                    <div>
-                                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                                            <?php do_action($this->plugin_name.'_tab'); ?>
-                                        </ul>
-                                    </div>
-                                </nav>
+                                
+                                    
                             </div>
                         </div>
                         </div>
@@ -71,10 +68,15 @@ class pisol_corw_menu{
                 <div class="col-12">
                 <div class="bg-light border pl-3 pr-3 pt-0">
                     <div class="pisol-row">
+                        <div class="col-12 col-md-12 col-lg-4 col-xl-3 border-right">
+                            <div id="pisol-side-menu" class="mb-4 rounded py-3 ">
+                                    <?php do_action($this->plugin_name.'_tab'); ?>
+                            </div>
+                            <?php do_action($this->plugin_name.'_promotion'); ?>
+                        </div>
                         <div class="col">
                         <?php do_action($this->plugin_name.'_tab_content'); ?>
                         </div>
-                        <?php do_action($this->plugin_name.'_promotion'); ?>
                     </div>
                 </div>
                 </div>
@@ -87,8 +89,6 @@ class pisol_corw_menu{
 
     function promotion(){
         ?>
-        <div class="col-12 col-sm-4 col-xl-3 col-lg-4 pt-3 border-left">
-
         <div class="pisol-cor-banner">
 
             <div class="pisol-cor-stars" aria-label="5 star rating">
@@ -100,7 +100,7 @@ class pisol_corw_menu{
             </p>
             <p class="pisol-cor-rating">Rated <strong>4.9/5</strong> — Users love it</p>
 
-            <ul class="pisol-cor-features">
+            <ul class="pisol-cor-features d-none d-lg-block d-lx-block">
                 <li><span class="pisol-cor-check">✓</span> Partial order cancellation</li>
                 <li><span class="pisol-cor-check">✓</span> Disable cancel for specific product</li>
                 <li><span class="pisol-cor-check">✓</span> Upload image with cancel request</li>
@@ -121,12 +121,7 @@ class pisol_corw_menu{
                 <span class="pisol-cor-lock">🔓</span> Unlock Pro Now — Limited Time Price!
             </a>
 
-        </div>
-
-            
-            
-        </div>
-        
+        </div>        
         <?php
     }
 

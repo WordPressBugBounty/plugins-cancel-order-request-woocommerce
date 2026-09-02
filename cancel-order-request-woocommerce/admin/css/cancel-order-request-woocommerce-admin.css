@@ -181,3 +181,76 @@ h4.pi-bottom-banner{
 	margin-bottom:15px;
 	text-align: center;
 }
+
+/** New Design element */
+.pisol-field-label{
+    color:var(--dark) !important;
+    font-weight:600 !important;
+}
+
+.field-type-setting_category.py-4{
+  padding-top:10px !important;
+  padding-bottom:10px !important;
+}
+
+.field-type-setting_category .pisol-field-title{
+  color:#fff !important;
+  font-weight:900 !important;
+  font-size:16px !important;
+}
+
+.field-type-setting_category .pisol-form-label-col{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.field-type-setting_category .pisol-info-links .pi-link{
+  margin-top:0 !important;
+  margin-bottom:0 !important;
+}
+
+.bootstrap-wrapper #submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    padding: 14px 24px;
+    min-height: 52px;
+
+    background: #ee6443;
+    color: #fff;
+    border: 0;
+    border-radius: 7px;
+
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.2;
+    cursor: pointer;
+
+    box-shadow: 0 6px 14px rgba(238, 100, 67, 0.25);
+
+    transition:
+        background-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.15s ease;
+}
+
+.bootstrap-wrapper #submit:hover {
+    background: #e45736;
+    box-shadow: 0 8px 18px rgba(238, 100, 67, 0.32);
+    transform: translateY(-1px);
+}
+
+.bootstrap-wrapper #submit:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 10px rgba(238, 100, 67, 0.22);
+}
+
+.bootstrap-wrapper #submit:focus-visible {
+    outline: 3px solid rgba(238, 100, 67, 0.25);
+    outline-offset: 3px;
+}
+
+/* Emd new desing elements */

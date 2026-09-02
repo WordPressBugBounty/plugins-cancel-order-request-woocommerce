@@ -1,0 +1,144 @@
+/* ===== Modern Sidebar Menu — PIWebSolution — Themeable ===== */
+#pisol-side-menu {
+    /* Container */
+    --pisol-dtt-menu-bg: #ffffff;
+    --pisol-dtt-menu-border: #e5e7eb;
+
+    /* Default (inactive) menu item */
+    --pisol-dtt-item-text: #1e1e1e;
+    --pisol-dtt-item-icon-opacity: 0.75;
+
+    /* Hover state */
+    --pisol-dtt-item-hover-bg: #f3f4f6;
+    --pisol-dtt-item-hover-text: #111827;
+
+    /* Active tab */
+    --pisol-dtt-item-active-bg: #eef2ff;
+    --pisol-dtt-item-active-text: #ee6443;
+    --pisol-dtt-item-active-border: #e0e7ff;
+    --pisol-dtt-item-active-accent: #ee6443;
+
+    /* Documentation (footer) link */
+    --pisol-dtt-item-doc-text: #b45309;
+    --pisol-dtt-item-doc-text-hover: #92400e;
+    --pisol-dtt-item-doc-divider: #e5e7eb;
+
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    position: sticky;
+    /*
+    padding: 12px !important;
+    background: var(--pisol-dtt-menu-bg);
+    border: 1px solid var(--pisol-dtt-menu-border);
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.03);
+    */
+}
+
+/* Base link style — targets any direct anchor child, no .pi-side-menu class in this markup */
+#pisol-side-menu > a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 14px;
+    border-radius: 8px;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--pisol-dtt-item-text) !important;
+    background: transparent !important;
+    border: 1px solid transparent !important;
+    text-decoration: none !important;
+    transition: background-color 0.15s ease, color 0.15s ease, transform 0.1s ease;
+}
+
+#pisol-side-menu > a .dashicons {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
+    flex-shrink: 0;
+    opacity: var(--pisol-dtt-item-icon-opacity);
+    transition: opacity 0.15s ease;
+}
+
+#pisol-side-menu > a:hover {
+    background: var(--pisol-dtt-item-hover-bg) !important;
+    color: var(--pisol-dtt-item-hover-text) !important;
+    transform: translateX(2px);
+}
+
+#pisol-side-menu > a:hover .dashicons {
+    opacity: 1;
+}
+
+/* Active tab */
+#pisol-side-menu > a.bg-primary {
+    background: var(--pisol-dtt-item-active-bg) !important;
+    color: var(--pisol-dtt-item-active-text) !important;
+    font-weight: 600;
+    border-color: var(--pisol-dtt-item-active-border);
+    box-shadow: inset 3px 0 0 var(--pisol-dtt-item-active-accent);
+}
+
+#pisol-side-menu > a.bg-primary .dashicons {
+    opacity: 1;
+    color: var(--pisol-dtt-item-active-accent);
+}
+
+/* Inactive tabs */
+#pisol-side-menu > a.bg-secondary {
+    background: transparent !important;
+    color: var(--pisol-dtt-item-text) !important;
+}
+
+/* Documentation link — no dedicated class in this markup, so hooked via title.
+   Ask for a real class (e.g. pi-side-menu-doc) if this component is reused elsewhere. */
+#pisol-side-menu > a[title="Documentation"] {
+    margin-top: 8px;
+    padding-top: 12px;
+    border-top: 1px dashed var(--pisol-dtt-item-doc-divider);
+    border-radius: 0;
+    background: transparent !important;
+    color: var(--pisol-dtt-item-doc-text) !important;
+    font-weight: 600;
+}
+
+#pisol-side-menu > a[title="Documentation"]:hover {
+    color: var(--pisol-dtt-item-doc-text-hover) !important;
+    transform: none;
+}
+
+/* Sticky offset spacing */
+.pi-sticky {
+    top: 32px;
+}
+
+@media (max-width: 992px) {
+    #pisol-side-menu {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 8px 10px;
+        align-items: stretch;
+    }
+
+    #pisol-side-menu > a {
+        width: 100%;
+        justify-content: flex-start;
+        min-height: 48px;
+        padding: 10px 12px;
+    }
+
+    #pisol-side-menu > a[title="Documentation"] {
+        grid-column: 1 / -1;
+        margin-top: 0;
+        border-top: 1px dashed var(--pisol-dtt-item-doc-divider);
+        border-radius: 8px;
+    }
+}
+
+@media (max-width: 600px) {
+    #pisol-side-menu {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}

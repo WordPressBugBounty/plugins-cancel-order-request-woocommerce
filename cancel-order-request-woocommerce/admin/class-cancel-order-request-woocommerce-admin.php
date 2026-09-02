@@ -41,7 +41,7 @@ class Cancel_Order_Request_Woocommerce_Admin {
 
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/cancel-order-request-woocommerce-admin.css', array(), $this->version, 'all' );
 
-		wp_enqueue_style( $this->plugin_name."_bootstrap", plugin_dir_url( __FILE__ ) . 'css/bootstrap.css', array(), $this->version, 'all' );
+		
 
 		wp_enqueue_style( 'select2', WC()->plugin_url() . '/assets/css/select2.css');
 	}

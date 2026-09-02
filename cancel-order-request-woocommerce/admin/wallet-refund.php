@@ -80,7 +80,7 @@ class pisol_corw_wallet_refund_setting{
                 new pisol_class_form_corw($setting, $this->setting_key);
             }
         ?>
-        <input type="submit" class="my-3 btn btn-primary btn-md" value="Save Option" />
+        <input type="submit" id="submit"  class="my-3 btn btn-primary btn-md" value="Save Option" />
         </form>
        <?php
     }
