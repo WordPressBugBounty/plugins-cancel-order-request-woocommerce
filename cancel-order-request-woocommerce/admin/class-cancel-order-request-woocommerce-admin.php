@@ -39,7 +39,7 @@ class Cancel_Order_Request_Woocommerce_Admin {
 
 		if(filter_input(INPUT_GET, 'page') !== 'pisol-cancel-order-request') return;
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/cancel-order-request-woocommerce-admin.css', array(), $this->version, 'all' );
+		//wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/cancel-order-request-woocommerce-admin.css', array(), $this->version, 'all' );
 
 		
 

@@ -100,7 +100,7 @@ class pisol_class_form_corw{
         $is_open     = !isset($this->setting['open']) || $this->setting['open']; // defaults to open
 
         $group_desc = isset($this->setting['desc'])
-            ? '<p class="text-muted">'.wp_kses($this->setting['desc'], $this->allowed_tags).'</p>'
+            ? '<div class="pisol-field-description"><small>'.wp_kses($this->setting['desc'], $this->allowed_tags).'</small></div>'
             : '';
 
         $group_links = $this->get_link_html();
@@ -108,28 +108,30 @@ class pisol_class_form_corw{
         if(!empty($group_links) && !empty($collapsible)){
             $group_links = str_replace('<a ', '<a onclick="event.stopPropagation();" ', $group_links);
         }
-        $group_links_html = !empty($group_links) ? '<div class="pisol-group-link-container mt-2">'.$group_links.'</div>' : '';
+        $group_links_html = !empty($group_links) ? $group_links : '';
 
         if($collapsible){
             $group_label = isset($this->setting['label'])
-                ? wp_kses_post($this->setting['label'])
+                ? '<h3 class="pisol-field-title h5 mb-3 '.esc_attr($this->setting['class_title'] ?? '').'">'.wp_kses_post($this->setting['label']).'</h3>'
                 : '';
 
-            $group_open = '<details id="group_'.esc_attr($this->setting['field']).'" class="pisol-field-group-container border rounded p-3 mb-4 '.esc_attr($this->setting['class'] ?? '').'"'.($is_open ? ' open' : '').'>'
-                . '<summary class="h6 mb-0 pisol-field-group-summary" style="cursor:pointer;">'.$group_label
+            $group_open = '<details id="row_'.esc_attr($this->setting['field']).'" class="pisol-form-element-row field-type-group border rounded p-3 mb-4 '.esc_attr($this->setting['class'] ?? '').'"'.($is_open ? ' open' : '').'>'
+                . '<summary class="h6 mb-0 pisol-field-group-summary pisol-form-label-col" style="cursor:pointer;">'.$group_label
                 .$group_desc.$group_links_html.'</summary>'
                 . '<div class="pt-3 pisol-field-group-content">';
 
             $group_close = '</div></details>';
         }else{
             $group_label = isset($this->setting['label'])
-                ? '<h3 class="pisol-field-group-title h5 mb-3 '.esc_attr($this->setting['class_title'] ?? '').'">'.wp_kses_post($this->setting['label']).'</h3>'
+                ? '<h3 class="pisol-field-title h5 mb-3 '.esc_attr($this->setting['class_title'] ?? '').'">'.wp_kses_post($this->setting['label']).'</h3>'
                 : '';
 
-            $group_open = '<div id="group_'.esc_attr($this->setting['field']).'" class="pisol-field-group-container border rounded p-3 mb-4 '.esc_attr($this->setting['class'] ?? '').'">'
+            $group_open = '<div id="row_'.esc_attr($this->setting['field']).'" class="pisol-form-element-row field-type-group border rounded p-3 mb-4 '.esc_attr($this->setting['class'] ?? '').'">'
+                .'<div class="pisol-form-label-col">'
                 . $group_label
                 . $group_desc
-                . $group_links_html;
+                . $group_links_html
+                . '</div>';
 
             $group_close = '</div>';
         }
@@ -402,12 +404,12 @@ class pisol_class_form_corw{
         wp_enqueue_media();
         add_action( 'admin_footer', array($this,'media_selector_scripts') );
         $field = '
-        <div class="row align-items-center">
-        <div class="col-6">
+        <div class="row align-items-center pisol-image-field-container">
+        <div class="col-6 pisol-image-field-button-container">
         <input id="'.esc_attr($this->setting['field']).'_button" type="button" class="button" value="Upload image" />
         <input type="hidden" name="'.esc_attr($this->setting['field']).'" id="'.esc_attr($this->setting['field']).'" value="'.esc_attr($this->saved_value).'">
         </div>
-        <div class="col-6">
+        <div class="col-6 pisol-image-field-preview-container">
         <div class="image-preview-wrapper">
         <img id="'.esc_attr($this->setting['field']).'_preview" '.($this->saved_value > 0 ? 'src="'.wp_get_attachment_url( get_option( $this->setting['field'] ) ).'"': '').' width="100" height="100" style="max-height: 100px; width: 100px;">
         <a href="#" class="clear-image-'.esc_attr($this->setting['field']).'">Clear</a>

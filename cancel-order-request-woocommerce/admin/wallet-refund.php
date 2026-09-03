@@ -28,6 +28,8 @@ class pisol_corw_wallet_refund_setting{
         $this->active_tab = $this->tab != "" ? $this->tab : 'default';
 
         $this->settings = array(
+
+             array('field'=>'color-setting', 'class'=> 'bg-dark2 text-light', 'class_title'=>'text-light font-weight-light h4', 'label'=>__('Autorefund','cancel-order-request-woocommerce'), 'type'=>'setting_category'),
             
             array('field'=>'pi_corw_enable_wallet_refund', 'label'=>__('Enable store credit refund','cancel-order-request-woocommerce'),'type'=>'switch', 'default'=> 0, 'desc'=>__('When user will place a cancellation request the order will be directly accepted and the refund will be added in the wallet','cancel-order-request-woocommerce')),
 
@@ -68,7 +70,7 @@ class pisol_corw_wallet_refund_setting{
 
     function tab_content(){
         if(!pisol_corw_wallet_refund::has_supported_wallet()){
-            echo '<div class="alert alert-success mt-3">This feature requires another plugin (<a href="https://wordpress.org/plugins/add-coupon-by-link-for-woocommerce/" target="_blank">Add coupon by url / Store credit</a>) from wordpress.org You can install it using below button<br> <button id="pisol-corw-install-dependency-plugin" class="button-primary mt-3">Click to Install / Activate module</button></div> ';
+            echo '<div style="border:1px solid #ccc; border-radius:20px; padding:20px; margin:20px; display:flex; align-items:center; grid-gap:20px;"><p>This feature requires another plugin (<a href="https://wordpress.org/plugins/add-coupon-by-link-for-woocommerce/" target="_blank">Add coupon by url / Store credit</a>) from wordpress.org You can install it using below button</p><button id="pisol-corw-install-dependency-plugin" class="button-primary mt-3">Click to Install / Activate module</button></div> ';
             
             return;
         }
