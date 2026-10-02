@@ -1,6 +1,6 @@
 <?php
 /**
-* version 4.1
+* version 4.2
 * code optimized now we can make new desing for each plugin
 */
 defined( 'ABSPATH' ) or die( 'No script kiddies please!' );

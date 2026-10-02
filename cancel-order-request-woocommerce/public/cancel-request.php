@@ -21,19 +21,7 @@ class pisol_corw_cancel_request{
 
         add_action('wp_loaded', array($this, 'showMessage'));
 
-         /**
-         * This is needed as wc session is not created for non-loged in users
-         */
-        add_action( 'woocommerce_init',  array($this, 'startSession') );
     }
-
-    function startSession(){
-        if(function_exists('WC') && isset(WC()->session)){
-            if ( !is_admin() && !WC()->session->has_session() ) {
-                WC()->session->set_customer_session_cookie( true );
-            }
-        }
-    } 
 
     function orderCancelRequestButton($actions, $order){
         
