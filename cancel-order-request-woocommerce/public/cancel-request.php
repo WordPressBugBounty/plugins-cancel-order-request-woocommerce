@@ -114,6 +114,17 @@ class pisol_corw_cancel_request{
         return apply_filters('pisol_corw_filter_reasons', $reasons, $order_id);
     }
 
+    function getValidPredefinedReason($order_id){
+        if(!isset($_POST['predefined_reason']) || !is_string($_POST['predefined_reason'])) return '';
+
+        $predefined_reason = wp_unslash($_POST['predefined_reason']);
+        $reasons = $this->predefinedReasonArray($order_id);
+
+        if(!is_array($reasons) || !in_array($predefined_reason, $reasons, true)) return '';
+
+        return $predefined_reason;
+    }
+
     function predefinedReasonRadioButton($order_id){
         $reasons = $this->predefinedReasonArray($order_id);
 
@@ -129,14 +140,12 @@ class pisol_corw_cancel_request{
     }
 
     function cancellationRequest(){
-        $order_id = filter_input(INPUT_POST, 'order_id');
-        $reason = filter_input(INPUT_POST, 'order_cancel_reason');
+        $order_id = absint(wp_unslash(filter_input(INPUT_POST, 'order_id')));
+        $reason = sanitize_textarea_field(wp_unslash(filter_input(INPUT_POST, 'order_cancel_reason')));
 
-        $redirect = filter_input(INPUT_POST, 'redirect_url');
+        $redirect = esc_url_raw( wp_unslash(filter_input(INPUT_POST, 'redirect_url') ?? '') );
 
-        $predefined_reason = filter_input(INPUT_POST, 'predefined_reason');
-
-        $do_wallet_refund = filter_input(INPUT_POST, 'do_wallet_refund');
+        $do_wallet_refund = sanitize_text_field(wp_unslash(filter_input(INPUT_POST, 'do_wallet_refund')));
 
         $do_wallet_refund = !empty($do_wallet_refund) ? 1 : 0;
 
@@ -144,6 +153,8 @@ class pisol_corw_cancel_request{
         if(!isset($_POST['pi_cancellation_request_nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['pi_cancellation_request_nonce'])), 'cancellation_request_'.$order_id)){
             wp_die(esc_html__('Invalid request', 'cancel-order-request-woocommerce'), '', array('response' => 403));
         }
+
+        $predefined_reason = $this->getValidPredefinedReason($order_id);
 
         if(!self::reasonDescriptionGiven($reason, $predefined_reason)){
 
@@ -271,11 +282,11 @@ class pisol_corw_cancel_request{
        
         $notes = array();
         if(!empty($reason)){
-            $notes[] = __('Cancellation reason: ','cancel-order-request-woocommerce').'<br>'.$reason;
+            $notes[] = __('Cancellation reason: ','cancel-order-request-woocommerce').$reason;
         }
             
         if(!empty($predefined_reason)){
-            $notes[] = __('Selected reason for cancellation: ','cancel-order-request-woocommerce').'<br>'.$predefined_reason;
+            $notes[] = __('Selected reason for cancellation: ','cancel-order-request-woocommerce').$predefined_reason;
         }
         
         $order = wc_get_order($order_id);
@@ -285,10 +296,10 @@ class pisol_corw_cancel_request{
         if(!empty($notes)){
             if(is_array($notes)){
                 foreach($notes as $note){
-                    $order->add_order_note( $note );
+                    $order->add_order_note( esc_html($note) );
                 }
             }else{
-                $order->add_order_note( $notes );
+                $order->add_order_note( esc_html($notes) );
             }
         }
     }
